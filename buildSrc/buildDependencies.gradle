@@ -1,0 +1,13 @@
+rootProject.ext.versions = [
+        agp: '7.0.0-alpha03',
+        kotlin: '1.4.21',
+        lint: '27.3.0-alpha03'
+]
+
+rootProject.ext.build = [
+        androidGradlePlugin: "com.android.tools.build:gradle:${versions.agp}",
+        androidGradlePlugin_builder: "com.android.tools.build:builder:${versions.agp}",
+        androidGradlePlugin_builderModel: "com.android.tools.build:builder-model:${versions.agp}",
+        androidGradlePlugin_lintModel: "com.android.tools.lint:lint-model:${versions.lint}",
+        kotlinGradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+]
