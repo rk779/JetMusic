@@ -1,4 +1,4 @@
-package wtf.rk585.able.ui
+package wtf.rk585.able.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

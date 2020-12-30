@@ -1,4 +1,4 @@
-package wtf.rk585.able.ui
+package wtf.rk585.able.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
