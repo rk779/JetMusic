@@ -1,7 +1,11 @@
 package wtf.rk585.able.ui.navigation
 
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.compose.material.icons.Icons.Rounded
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.LibraryMusic
+import androidx.compose.material.icons.rounded.Search
+import androidx.compose.ui.graphics.vector.ImageVector
 import wtf.rk585.able.R
 
 /**
@@ -10,11 +14,11 @@ import wtf.rk585.able.R
 enum class Destination(
     val route: String,
     @StringRes val labelRes: Int,
-    @DrawableRes val drawableRes: Int
+    val icon: ImageVector
 ) {
-    Home("home", R.string.home, R.drawable.ic_home_24dp),
-    Search("search", R.string.search, R.drawable.ic_search_24dp),
-    Library("library", R.string.library, R.drawable.ic_library_music_24dp);
+    Home("home", R.string.nav_home, Rounded.Home),
+    Search("search", R.string.nav_search, Rounded.Search),
+    Library("library", R.string.nav_library, Rounded.LibraryMusic);
 
     companion object {
         val startDestination = Home

@@ -2,7 +2,6 @@ package wtf.rk585.able.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val purple200 = Color(0xFFBB86FC)
-val purple500 = Color(0xFF6200EE)
-val purple700 = Color(0xFF3700B3)
-val teal200 = Color(0xFF03DAC5)
+val Green400 = Color(0xFFB8CD7E)
+val Green200 = Color(0xFFB8D9A4)
+val Jaguar = Color(0xFF202030)

@@ -17,8 +17,10 @@ object Dependencies {
 
         object Compose {
             const val material = "androidx.compose.material:material:$COMPOSE_VERSION"
+            const val materialIcons = "androidx.compose.material:material-icons-extended:$COMPOSE_VERSION"
             const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha04"
             const val ui = "androidx.compose.ui:ui:$COMPOSE_VERSION"
+            const val uiGraphics = "androidx.compose.ui:ui-graphics:$COMPOSE_VERSION"
             const val uiTooling = "androidx.compose.ui:ui-tooling:$COMPOSE_VERSION"
         }
 

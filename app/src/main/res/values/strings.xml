@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Able Compose</string>
-    <string name="home">Home</string>
-    <string name="search">Search</string>
-    <string name="library">Your Library</string>
+
+    <!-- BottomNav -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_library">Your Library</string>
 </resources>
