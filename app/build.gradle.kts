@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     `able-plugin`
+    `core-library-desugaring`
 }
 
 android {

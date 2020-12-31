@@ -14,6 +14,7 @@ object Dependencies {
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:1.3.0-alpha02"
         const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha05"
+        const val coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:1.1.1"
 
         object Compose {
             const val material = "androidx.compose.material:material:$COMPOSE_VERSION"

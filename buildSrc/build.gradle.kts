@@ -20,6 +20,10 @@ gradlePlugin {
             id = "able-plugin"
             implementationClass = "AblePlugin"
         }
+        register("coreLibraryDesugaring") {
+            id = "core-library-desugaring"
+            implementationClass = "CoreLibraryDesugaringPlugin"
+        }
     }
 }
 
