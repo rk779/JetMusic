@@ -84,8 +84,11 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.compose.activity)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(projects.ui.common.compose)
+    implementation(projects.ui.home)
+    implementation(projects.ui.library)
+    implementation(projects.ui.nowPlaying)
+    implementation(projects.ui.search)
 }

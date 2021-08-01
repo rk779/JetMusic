@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Vivace</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_library">Your Library</string>
+</resources>
