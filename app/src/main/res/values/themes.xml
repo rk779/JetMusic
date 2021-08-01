@@ -1,0 +1,19 @@
+<resources>
+    <style name="Platform.Theme.Vivace" parent="android:Theme.Material.Light" />
+
+    <style name="Base.Theme.Vivace" parent="Platform.Theme.Vivace">
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Theme.Vivace" parent="Base.Theme.Vivace" />
+
+    <style name="Theme.Vivace.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Vivace.Main" parent="Theme.Vivace.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
