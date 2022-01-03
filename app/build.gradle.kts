@@ -53,18 +53,18 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     lint {
         // Disable lintVital. Not needed since lint is run on CI
-        isCheckReleaseBuilds = false
+        checkReleaseBuilds = false
         // Ignore any tests
-        isIgnoreTestSources = true
+        ignoreTestSources = true
         // Make the build fail on any lint errors
-        isAbortOnError = true
+        abortOnError = true
         // Allow lint to check dependencies
-        isCheckDependencies = true
+        checkDependencies = true
     }
 
     packagingOptions {

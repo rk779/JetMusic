@@ -5,8 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
-        classpath("com.android.tools.build:gradle:7.0.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
+        classpath("com.android.tools.build:gradle:7.1.0-beta05")
     }
 }
 
@@ -37,11 +37,11 @@ subprojects {
             freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
             freeCompilerArgs += "-Xopt-in=kotlin.Experimental"
 
-            // Set JVM target to 1.8
-            jvmTarget = "1.8"
+            // Set JVM target to 11
+            jvmTarget = JavaVersion.VERSION_11.toString()
 
             // Set kotlin language version
-            languageVersion = "1.5"
+            languageVersion = "1.6"
         }
     }
 }
