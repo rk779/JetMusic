@@ -1,5 +1,6 @@
 [versions]
 accompanist = "0.22.0-rc"
+coil = "2.0.0-alpha06"
 compose = "1.1.0-rc01"
 composeCompiler = "1.1.0-rc02"
 coroutines = "1.6.0"
@@ -22,6 +23,10 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 # Navigation
 androidx-navigation-compose = "androidx.navigation:navigation-compose:2.4.0-rc01"
 
+# Image Loading
+coil-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
 # Dependency Injection
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
@@ -31,6 +36,7 @@ dagger-hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plu
 
 # Google
 google-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
+google-accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 google-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 # Kotlin

@@ -22,8 +22,10 @@ dependencies {
     api(libs.androidx.compose.materialIcons)
     api(libs.androidx.compose.runtime)
     api(libs.androidx.compose.ui.tooling)
+    api(libs.coil.compose)
     api(libs.google.accompanist.insets)
     api(projects.ui.common.resources)
 
+    implementation(libs.google.accompanist.placeholder.material)
     implementation(libs.google.accompanist.systemUiController)
 }
