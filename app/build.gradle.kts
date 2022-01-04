@@ -1,6 +1,13 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 android {
@@ -80,6 +87,10 @@ android {
 dependencies {
     implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+    implementation(projects.core.base)
     implementation(projects.ui.common.compose)
     implementation(projects.ui.home)
     implementation(projects.ui.library)
