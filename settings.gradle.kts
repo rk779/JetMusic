@@ -7,6 +7,9 @@ dependencyResolutionManagement {
 }
 
 include(":app")
+include(":core:base")
+include(":core:data")
+include(":core:domain")
 include(":ui:common:compose")
 include(":ui:common:resources")
 include(":ui:home")
