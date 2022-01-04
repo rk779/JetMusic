@@ -6,6 +6,7 @@ coroutines = "1.6.0"
 dagger = "2.40.5"
 hilt = "2.40.5"
 kotlin = "1.6.10"
+okHttp = "4.9.3"
 
 [libraries]
 # Android Gradle Plugin
@@ -36,5 +37,11 @@ google-accompanist-systemUiController = { module = "com.google.accompanist:accom
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# NewPipe Extractor
+newpipe-extractor = "com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor:v0.21.12"
+
+# OkHttp3
+okHttp3-okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
 
 [bundles]

@@ -1,6 +1,13 @@
 plugins {
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
+}
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
 }
 
 android {
@@ -14,5 +21,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
 
+    api(libs.newpipe.extractor)
+
+    implementation(libs.okHttp3.okHttp)
+
+    api(projects.core.base)
 }

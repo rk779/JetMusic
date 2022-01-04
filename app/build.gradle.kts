@@ -90,7 +90,10 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 
+    implementation(libs.okHttp3.okHttp)
+
     implementation(projects.core.base)
+    implementation(projects.core.data)
     implementation(projects.ui.common.compose)
     implementation(projects.ui.home)
     implementation(projects.ui.library)
