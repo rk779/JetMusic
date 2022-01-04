@@ -96,6 +96,7 @@ dependencies {
 
     implementation(projects.core.base)
     implementation(projects.core.data)
+    implementation(projects.core.domain)
     implementation(projects.ui.common.compose)
     implementation(projects.ui.home)
     implementation(projects.ui.library)

@@ -5,4 +5,11 @@
     <string name="nav_home">Home</string>
     <string name="nav_search">Search</string>
     <string name="nav_library">Your Library</string>
+
+    <!-- Search -->
+    <string name="search_hint_query">Songs, albums or playlists</string>
+
+    <!-- Generic -->
+    <string name="generic_clear">Clear</string>
+
 </resources>

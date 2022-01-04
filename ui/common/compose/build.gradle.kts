@@ -24,7 +24,10 @@ dependencies {
     api(libs.androidx.compose.ui.tooling)
     api(libs.coil.compose)
     api(libs.google.accompanist.insets)
+    api(libs.google.accompanist.insets.ui)
     api(projects.ui.common.resources)
+
+    implementation(libs.androidx.lifecycle.runtime)
 
     implementation(libs.google.accompanist.placeholder.material)
     implementation(libs.google.accompanist.systemUiController)

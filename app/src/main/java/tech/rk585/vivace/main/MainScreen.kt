@@ -2,8 +2,6 @@ package tech.rk585.vivace.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -17,8 +15,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.insets.ui.Scaffold
 import tech.rk585.vivace.ui.common.compose.components.BottomNavigationBar
 import tech.rk585.vivace.ui.common.compose.components.BottomNavigationItem
+import tech.rk585.vivace.ui.common.compose.theme.translucentSurfaceColor
 
 @Composable
 internal fun MainScreen() {
@@ -88,7 +88,7 @@ private fun BottomNavigationBar(
     navigateToScreen: (Screen) -> Unit
 ) {
     BottomNavigationBar(
-        backgroundColor = MaterialTheme.colors.surface,
+        backgroundColor = translucentSurfaceColor(),
         elevation = 4.dp
     ) {
         Screen.values().forEach { screen ->

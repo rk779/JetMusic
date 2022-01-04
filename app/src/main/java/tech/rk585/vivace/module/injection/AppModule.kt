@@ -19,7 +19,7 @@ object AppModule {
             io = Dispatchers.IO,
             computation = Dispatchers.Default,
             main = Dispatchers.Main,
-            network = Dispatchers.Default
+            network = Dispatchers.IO
         )
     }
 }
