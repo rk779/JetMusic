@@ -5,6 +5,9 @@ composeCompiler = "1.1.0-rc02"
 kotlin = "1.6.10"
 
 [libraries]
+# Android Gradle Plugin
+android-pluginGradle = { module = "com.android.tools.build:gradle", version = "7.1.0-beta05" }
+
 # AndroidX Compose libraries
 androidx-compose-activity = "androidx.activity:activity-compose:1.4.0"
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
@@ -18,5 +21,8 @@ androidx-navigation-compose = "androidx.navigation:navigation-compose:2.4.0-rc01
 # Google
 google-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
 google-accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
+
+# Kotlin
+kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [bundles]

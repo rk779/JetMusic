@@ -1,5 +1,3 @@
-import java.util.*
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -19,8 +17,9 @@ android {
     val keystoreConfigFile = rootProject.layout.projectDirectory.file("keystore.properties")
     if (keystoreConfigFile.asFile.exists()) {
         val contents = providers.fileContents(keystoreConfigFile).asText.forUseAtConfigurationTime()
-        val keystoreProperties = Properties()
+        val keystoreProperties = org.jetbrains.kotlin.konan.properties.Properties()
         keystoreProperties.load(contents.get().byteInputStream())
+
         signingConfigs {
             register("release") {
                 keyAlias = keystoreProperties["keyAlias"] as String
@@ -43,17 +42,12 @@ android {
         }
     }
 
+    buildFeatures.compose = true
+    composeOptions.kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
 
     lint {

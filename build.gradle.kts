@@ -2,18 +2,12 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-        classpath("com.android.tools.build:gradle:7.1.0-beta05")
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
+        classpath(libs.android.pluginGradle)
+        classpath(libs.kotlin.pluginGradle)
     }
 }
 
@@ -33,9 +27,12 @@ subprojects {
             allWarningsAsErrors = true
 
             // Enable experimental coroutines APIs, including Flow
-            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
-            freeCompilerArgs += "-Xopt-in=kotlin.Experimental"
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xopt-in=kotlinx.coroutines.FlowPreview",
+                "-Xopt-in=kotlin.Experimental",
+                "-Xopt-in=kotlin.RequiresOptIn"
+            )
 
             // Set JVM target to 11
             jvmTarget = JavaVersion.VERSION_11.toString()
