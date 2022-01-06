@@ -5,6 +5,7 @@ compose = "1.1.0-rc01"
 composeCompiler = "1.1.0-rc02"
 coroutines = "1.6.0"
 dagger = "2.40.5"
+exoplayer = "2.16.1"
 hilt = "2.40.5"
 kotlin = "1.6.10"
 lifecycle = "2.4.0"
@@ -46,6 +47,12 @@ dagger-dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 dagger-hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+
+# ExoPlayer
+exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
+exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
+exoplayer-extension-mediasession = { module = "com.google.android.exoplayer:extension-mediasession", version.ref = "exoplayer" }
+exoplayer-extension-okHttp = { module = "com.google.android.exoplayer:extension-okhttp", version.ref = "exoplayer" }
 
 # Google
 google-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }

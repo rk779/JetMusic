@@ -92,11 +92,16 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
 
+    implementation(libs.exoplayer.core)
+    implementation(libs.exoplayer.extension.okHttp)
+    implementation(libs.exoplayer.ui)
+
     implementation(libs.okHttp3.okHttp)
 
     implementation(projects.core.base)
     implementation(projects.core.data)
     implementation(projects.core.domain)
+    implementation(projects.core.media)
     implementation(projects.ui.common.compose)
     implementation(projects.ui.home)
     implementation(projects.ui.library)
