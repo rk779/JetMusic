@@ -12,4 +12,6 @@
     <!-- Generic -->
     <string name="generic_clear">Clear</string>
 
+    <string name="playback_notification_channel_name">@string/app_name</string>
+    <string name="playback_notification_channel_description">Playback notification for Vivace</string>
 </resources>

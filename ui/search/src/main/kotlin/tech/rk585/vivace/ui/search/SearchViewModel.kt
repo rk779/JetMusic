@@ -3,6 +3,7 @@ package tech.rk585.vivace.ui.search
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cf.rk585.vivace.core.base.util.CoroutineDispatchers
 import cf.rk585.vivace.core.base.util.ObservableLoadingCounter
 import cf.rk585.vivace.core.domain.interactors.SearchMusic
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SearchViewModel @Inject constructor(
-    private val searchMusic: SearchMusic
+    private val searchMusic: SearchMusic,
+    val dispatchers: CoroutineDispatchers
 ) : ViewModel() {
     private val searchQuery = MutableStateFlow("")
     private val loadingState = ObservableLoadingCounter()

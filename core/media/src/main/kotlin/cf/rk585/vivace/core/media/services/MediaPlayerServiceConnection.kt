@@ -16,7 +16,7 @@ class MediaPlayerServiceConnection(
     private val mediaSource: AppMediaSource,
 ) {
     var playbackState = MutableStateFlow<PlaybackStateCompat?>(null)
-    var currentPlayingEpisode = MutableStateFlow<StreamInfo?>(null)
+    var currentPlayingSong = MutableStateFlow<StreamInfo?>(null)
 
     lateinit var mediaController: MediaControllerCompat
 
@@ -95,7 +95,7 @@ class MediaPlayerServiceConnection(
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {
             super.onMetadataChanged(metadata)
-            currentPlayingEpisode.value = metadata?.let {
+            currentPlayingSong.value = metadata?.let {
                 mediaSource.mediaSongs.find {
                     it.id == metadata.description?.mediaId
                 }

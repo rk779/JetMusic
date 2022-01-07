@@ -7,6 +7,7 @@ import androidx.core.view.WindowCompat
 import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint
 import tech.rk585.vivace.ui.common.compose.theme.VivaceTheme
+import tech.rk585.vivace.ui.nowPlaying.ProvidePlayerViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             VivaceTheme {
                 ProvideWindowInsets {
-                    MainScreen()
+                    ProvidePlayerViewModel {
+                        MainScreen(onBackPressedDispatcher)
+                    }
                 }
             }
         }

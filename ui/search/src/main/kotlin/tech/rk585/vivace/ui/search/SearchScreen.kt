@@ -1,5 +1,6 @@
 package tech.rk585.vivace.ui.search
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -28,15 +30,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import cf.rk585.vivace.core.base.extensions.interpunctize
 import cf.rk585.vivace.core.base.extensions.secondsToDuration
+import cf.rk585.vivace.core.base.util.CoroutineDispatchers
 import com.google.accompanist.insets.statusBarsPadding
 import com.google.accompanist.insets.ui.LocalScaffoldPadding
 import com.google.accompanist.insets.ui.Scaffold
+import kotlinx.coroutines.launch
+import org.schabi.newpipe.extractor.stream.StreamInfo
 import tech.rk585.vivace.ui.common.compose.components.CoverImage
 import tech.rk585.vivace.ui.common.compose.components.SearchTextField
 import tech.rk585.vivace.ui.common.compose.components.fullScreenLoading
 import tech.rk585.vivace.ui.common.compose.components.rememberFlowWithLifecycle
 import tech.rk585.vivace.ui.common.compose.theme.topAppBarTitleStyle
 import tech.rk585.vivace.ui.common.compose.theme.translucentSurface
+import tech.rk585.vivace.ui.nowPlaying.LocalPlayerViewModel
 
 @Composable
 fun SearchScreen() {
@@ -54,14 +60,16 @@ internal fun SearchScreen(
 
     Search(
         state = state,
-        onSearchQueryChanged = viewModel::updateSearch
+        onSearchQueryChanged = viewModel::updateSearch,
+        dispatchers = viewModel.dispatchers
     )
 }
 
 @Composable
 internal fun Search(
     state: SearchViewState,
-    onSearchQueryChanged: (query: String) -> Unit
+    onSearchQueryChanged: (query: String) -> Unit,
+    dispatchers: CoroutineDispatchers
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -78,7 +86,8 @@ internal fun Search(
     ) {
         SearchList(
             state = state,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            dispatchers = dispatchers
         )
     }
 }
@@ -133,8 +142,12 @@ private fun SearchAppBar(
 @Composable
 private fun SearchList(
     state: SearchViewState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dispatchers: CoroutineDispatchers
 ) {
+    val viewModel = LocalPlayerViewModel.current
+    val coroutineScope = rememberCoroutineScope()
+
     LazyColumn(
         contentPadding = LocalScaffoldPadding.current,
         modifier = modifier
@@ -169,7 +182,14 @@ private fun SearchList(
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                singleLineSecondaryText = true
+                singleLineSecondaryText = true,
+                modifier = Modifier
+                    .clickable {
+                        coroutineScope.launch(dispatchers.network) {
+                            val streamInfo = StreamInfo.getInfo(item.url)
+                            viewModel.playSongs(listOf(streamInfo), streamInfo)
+                        }
+                    }
             )
         }
     }

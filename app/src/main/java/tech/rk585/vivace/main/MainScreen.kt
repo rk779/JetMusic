@@ -1,7 +1,10 @@
 package tech.rk585.vivace.main
 
+import androidx.activity.OnBackPressedDispatcher
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -19,9 +22,14 @@ import com.google.accompanist.insets.ui.Scaffold
 import tech.rk585.vivace.ui.common.compose.components.BottomNavigationBar
 import tech.rk585.vivace.ui.common.compose.components.BottomNavigationItem
 import tech.rk585.vivace.ui.common.compose.theme.translucentSurfaceColor
+import tech.rk585.vivace.ui.nowPlaying.LocalPlayerViewModel
+import tech.rk585.vivace.ui.nowPlaying.components.PlayerBottomBar
+import tech.rk585.vivace.ui.nowPlaying.components.PlayerScreen
 
 @Composable
-internal fun MainScreen() {
+internal fun MainScreen(
+    backPressedDispatcher: OnBackPressedDispatcher
+) {
 
     val navController = rememberNavController()
     val navigateToScreen: (Screen) -> Unit = { screen ->
@@ -34,21 +42,33 @@ internal fun MainScreen() {
         }
     }
     val selectedScreen by navController.currentScreenAsState()
+    val playerViewModel = LocalPlayerViewModel.current
 
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(
-                selectedScreen = selectedScreen,
-                navigateToScreen = navigateToScreen
-            )
+            Column {
+                if (!playerViewModel.showFullScreen) {
+                    PlayerBottomBar(
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    BottomNavigationBar(
+                        selectedScreen = selectedScreen,
+                        navigateToScreen = navigateToScreen
+                    )
+                }
+            }
         },
         modifier = Modifier.fillMaxSize()
     ) {
         Box(Modifier.fillMaxSize()) {
             AppNavigation(navController)
+            PlayerScreen(
+                backPressedDispatcher = backPressedDispatcher
+            )
         }
     }
 }
+
 
 /**
  * Adds an [NavController.OnDestinationChangedListener] to this [NavController] and updates the return [State]

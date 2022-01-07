@@ -7,7 +7,7 @@ import org.schabi.newpipe.extractor.stream.StreamInfoItem
 internal data class SearchViewState(
     val query: String = "",
     val songs: List<StreamInfoItem> = emptyList(),
-    val refreshing: Boolean = false,
+    val refreshing: Boolean = false
 ) {
     companion object {
         val Empty = SearchViewState()

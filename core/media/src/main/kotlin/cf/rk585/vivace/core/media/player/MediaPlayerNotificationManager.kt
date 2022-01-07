@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
+import cf.rk585.vivace.core.media.R
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.google.android.exoplayer2.Player
@@ -41,6 +42,8 @@ class MediaPlayerNotificationManager(
         )
             .setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
             .setNotificationListener(notificationListener)
+            .setChannelDescriptionResourceId(R.string.playback_notification_channel_description)
+            .setChannelNameResourceId(R.string.playback_notification_channel_name)
             .build()
             .apply {
                 setMediaSessionToken(sessionToken)
@@ -73,13 +76,15 @@ class MediaPlayerNotificationManager(
             val loader = ImageLoader(context)
             val request = ImageRequest.Builder(context)
                 .data(mediaController.metadata.description.iconUri)
+                .target(
+                    onSuccess = { drawable ->
+                        val bitmap = (drawable as BitmapDrawable).bitmap
+                        callback.onBitmap(bitmap)
+                    }
+                )
                 .allowHardware(false)
                 .build()
-            val result = loader.enqueue(request).job
-            result.getCompleted().drawable?.let { drawable ->
-                val bitmap = (drawable as BitmapDrawable).bitmap
-                callback.onBitmap(bitmap)
-            }
+            loader.enqueue(request)
             return null
         }
     }

@@ -29,6 +29,8 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.runtime)
 
+    implementation(libs.androidx.palette)
+
     implementation(libs.google.accompanist.placeholder.material)
     implementation(libs.google.accompanist.systemUiController)
 }

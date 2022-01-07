@@ -32,4 +32,5 @@ dependencies {
     implementation(libs.exoplayer.ui)
 
     implementation(projects.core.data)
+    implementation(projects.ui.common.resources)
 }

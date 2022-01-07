@@ -25,7 +25,7 @@ subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         kotlinOptions {
             // Treat all Kotlin warnings as errors
-            allWarningsAsErrors = true
+            // allWarningsAsErrors = true
 
             // Enable experimental coroutines APIs, including Flow
             freeCompilerArgs = freeCompilerArgs + listOf(
