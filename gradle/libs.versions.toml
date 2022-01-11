@@ -14,7 +14,7 @@ paging = "3.1.0"
 
 [libraries]
 # Android Gradle Plugin
-android-pluginGradle = { module = "com.android.tools.build:gradle", version = "7.1.0-beta05" }
+android-pluginGradle = { module = "com.android.tools.build:gradle", version = "7.1.0-rc01" }
 
 # AndroidX Compose libraries
 androidx-compose-activity = "androidx.activity:activity-compose:1.4.0"
