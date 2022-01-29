@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Platform.Theme.JetMusic" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Base.Theme.JetMusic" parent="Platform.Theme.JetMusic">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.JetMusic" parent="Base.Theme.JetMusic" />
+</resources>
