@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
+    id("dagger.hilt.android.plugin")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -56,9 +58,28 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.androidx.compose)
+
+    // Dependency Injection
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+    // NewPipe Extractor
+    implementation(libs.newpipe.extractor)
+
+    // OkHttp
+    implementation(libs.okHttp3.okHttp)
+
+    // Chucker Debugger
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

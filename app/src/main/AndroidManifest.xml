@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ml.rk585.jetmusic">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="ml.rk585.jetmusic.JetMusic"
         android:allowBackup="true"
