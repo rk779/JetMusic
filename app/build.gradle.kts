@@ -71,6 +71,10 @@ dependencies {
     // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.androidx.compose)
+    implementation(libs.bundles.androidx.lifecycle)
+
+    // Image Loader
+    implementation(libs.bundles.coil)
 
     // Chucker Debugger
     debugImplementation(libs.chucker.debug)
