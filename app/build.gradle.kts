@@ -53,6 +53,7 @@ android {
     }
 
     kotlinOptions {
+        freeCompilerArgs = freeCompilerArgs + listOf("-Xopt-in=kotlin.RequiresOptIn")
         jvmTarget = JavaVersion.VERSION_11.toString()
         languageVersion = "1.6"
     }
@@ -64,22 +65,29 @@ kapt {
 }
 
 dependencies {
+    // Accompanist Libraries
+    implementation(libs.bundles.accompanist)
+
+    // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.androidx.compose)
+
+    // Chucker Debugger
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
 
     // Dependency Injection
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
+
+    // Kotlinx libraries
+    implementation(libs.bundles.kotlinx)
 
     // NewPipe Extractor
     implementation(libs.newpipe.extractor)
 
     // OkHttp
     implementation(libs.okHttp3.okHttp)
-
-    // Chucker Debugger
-    debugImplementation(libs.chucker.debug)
-    releaseImplementation(libs.chucker.release)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
