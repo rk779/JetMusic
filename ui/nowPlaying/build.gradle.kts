@@ -15,7 +15,7 @@ android {
     defaultConfig.minSdk = 21
 
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.get()
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
