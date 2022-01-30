@@ -16,13 +16,16 @@ import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.data.model.SearchType
 import ml.rk585.jetmusic.data.repo.MusicRepo
+import ml.rk585.jetmusic.data.service.PlayerConnection
 import org.schabi.newpipe.extractor.InfoItem
+import org.schabi.newpipe.extractor.stream.StreamInfoItem
 import javax.inject.Inject
 
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val musicRepo: MusicRepo
+    private val musicRepo: MusicRepo,
+    private val playerConnection: PlayerConnection
 ) : ViewModel() {
 
     private val searchQuery: MutableStateFlow<SearchQuery> = MutableStateFlow(SearchQuery())
@@ -47,6 +50,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun playMusic(streamInfoItem: StreamInfoItem) {
+        viewModelScope.launch {
+            val mediaItem = musicRepo.getMediaItemFromUrl(streamInfoItem)
+            playerConnection.play(mediaItem)
+        }
+    }
+
     init {
         viewModelScope.launch {
             searchQuery.debounce(300)
@@ -56,5 +66,10 @@ class HomeViewModel @Inject constructor(
                     _state.update { musicRepo.search(query) }
                 }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        playerConnection.releaseMediaController()
     }
 }

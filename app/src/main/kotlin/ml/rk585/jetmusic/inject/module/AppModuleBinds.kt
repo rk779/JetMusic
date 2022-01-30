@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import ml.rk585.jetmusic.appInitializers.AppInitializer
 import ml.rk585.jetmusic.appInitializers.CoilInitializer
+import ml.rk585.jetmusic.appInitializers.LogcatInitializer
 import ml.rk585.jetmusic.appInitializers.NewPipeInitializer
 
 @Module
@@ -20,4 +21,8 @@ abstract class AppModuleBinds {
     @Binds
     @IntoSet
     abstract fun provideNewPipeInitializer(bind: NewPipeInitializer): AppInitializer
+
+    @Binds
+    @IntoSet
+    abstract fun provideLogcatInitializer(bind: LogcatInitializer): AppInitializer
 }

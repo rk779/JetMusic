@@ -1,5 +1,6 @@
 package ml.rk585.jetmusic.ui.screens.home
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,31 +17,44 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
+import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.ui.components.JetMusicBottomNavigationBar
+import ml.rk585.jetmusic.ui.components.rememberFlowWithLifecycle
 import ml.rk585.jetmusic.ui.screens.home.pages.LibraryPage
 import ml.rk585.jetmusic.ui.screens.home.pages.SearchPage
+import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    openPlayer: () -> Unit
+) {
     val pagerState = rememberPagerState()
 
-    val viewModel: HomeViewModel = viewModel()
-    val items by viewModel.state.collectAsState()
-    val searchQuery by viewModel.query.collectAsState()
+    val viewModel: HomeViewModel = hiltViewModel()
+    val items by rememberFlowWithLifecycle(viewModel.state)
+        .collectAsState(initial = emptyList())
+    val searchQuery by rememberFlowWithLifecycle(viewModel.query)
+        .collectAsState(initial = SearchQuery())
 
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(
-                pagerState = pagerState,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Column {
+                MiniPlayerControls(
+                    openPlayerSheet = openPlayer,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                BottomNavigationBar(
+                    pagerState = pagerState,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) { insetPaddingValues ->
         HorizontalPager(
@@ -57,6 +71,7 @@ fun HomeScreen() {
                         searchQuery = searchQuery,
                         onUpdateQuery = viewModel::updateQuery,
                         onUpdateType = viewModel::updateSearchType,
+                        onPlayMusic = viewModel::playMusic,
                         items = items
                     )
                 }

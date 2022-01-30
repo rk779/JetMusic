@@ -2,8 +2,12 @@ package ml.rk585.jetmusic.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 
 val darkColorScheme = darkColorScheme()
 val lightColorScheme = lightColorScheme()
@@ -24,4 +28,9 @@ fun ColorScheme.toMaterial2Colors(isLight: Boolean): Colors {
         onError = onError,
         isLight = isLight
     )
+}
+
+@Composable
+fun Color.contrastComposite(alpha: Float = 0.1f): Color {
+    return contentColorFor(this).copy(alpha = alpha).compositeOver(this)
 }

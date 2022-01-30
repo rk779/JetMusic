@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
-import com.google.accompanist.insets.ProvideWindowInsets
 import dagger.hilt.android.AndroidEntryPoint
-import ml.rk585.jetmusic.ui.screens.home.HomeScreen
-import ml.rk585.jetmusic.ui.theme.JetMusicTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -19,11 +16,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            JetMusicTheme {
-                ProvideWindowInsets {
-                    HomeScreen()
-                }
-            }
+            JetMusicApp()
         }
     }
 }

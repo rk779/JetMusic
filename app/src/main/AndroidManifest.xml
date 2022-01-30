@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ml.rk585.jetmusic">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name="ml.rk585.jetmusic.JetMusic"
@@ -15,14 +18,25 @@
 
         <activity
             android:name="ml.rk585.jetmusic.ui.MainActivity"
+            android:configChanges="orientation"
             android:exported="true"
-            android:theme="@style/Theme.JetMusic">
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="ml.rk585.jetmusic.data.service.MusicService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaLibraryService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

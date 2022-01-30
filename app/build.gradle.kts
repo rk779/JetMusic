@@ -57,6 +57,10 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
         languageVersion = "1.6"
     }
+
+    lint {
+        disable.add("UnsafeOptInUsageError")
+    }
 }
 
 kapt {
@@ -70,8 +74,11 @@ dependencies {
 
     // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.palette.ktx)
     implementation(libs.bundles.androidx.compose)
     implementation(libs.bundles.androidx.lifecycle)
+    implementation(libs.bundles.androidx.media)
 
     // Image Loader
     implementation(libs.bundles.coil)
@@ -92,6 +99,9 @@ dependencies {
 
     // OkHttp
     implementation(libs.okHttp3.okHttp)
+
+    // Logging
+    implementation(libs.logcat.lib)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

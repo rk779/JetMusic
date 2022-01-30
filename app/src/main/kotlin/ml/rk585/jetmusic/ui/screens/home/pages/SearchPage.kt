@@ -50,6 +50,7 @@ import ml.rk585.jetmusic.ui.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
+import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,6 +59,7 @@ fun SearchPage(
     searchQuery: SearchQuery,
     onUpdateQuery: (String) -> Unit,
     onUpdateType: (SearchType) -> Unit,
+    onPlayMusic: (StreamInfoItem) -> Unit,
     items: List<InfoItem> = emptyList()
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -80,7 +82,8 @@ fun SearchPage(
         DummyList(
             modifier = Modifier.fillMaxSize(),
             items = items,
-            snackbarHostState = snackbarHostState
+            snackbarHostState = snackbarHostState,
+            onPlayMusic = onPlayMusic
         )
     }
 }
@@ -141,7 +144,8 @@ private fun DummyList(
     modifier: Modifier = Modifier,
     items: List<InfoItem> = emptyList(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    onPlayMusic: (StreamInfoItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
@@ -181,8 +185,12 @@ private fun DummyList(
                     )
                 },
                 modifier = Modifier.clickable {
-                    scope.launch {
-                        snackbarHostState.showSnackbar("Function not implemented")
+                    if (item.infoType == InfoItem.InfoType.STREAM) {
+                        onPlayMusic(item as StreamInfoItem)
+                    } else {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Function not implemented")
+                        }
                     }
                 }
             )

@@ -3,6 +3,7 @@ package ml.rk585.jetmusic.ui.components
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.SmallTopAppBar
@@ -38,6 +39,16 @@ fun JetMusicTopAppBar(
         color = containerColor
     ) {
         when (appBarStyle) {
+            AppBarStyle.Center -> {
+                CenterAlignedTopAppBar(
+                    title = title,
+                    modifier = Modifier.padding(contentPadding),
+                    navigationIcon = navigationIcon,
+                    actions = actions,
+                    colors = colors,
+                    scrollBehavior = scrollBehavior
+                )
+            }
             AppBarStyle.Small -> {
                 SmallTopAppBar(
                     title = title,
@@ -73,12 +84,13 @@ fun JetMusicTopAppBar(
 }
 
 enum class AppBarStyle {
-    Small, Medium, Large
+    Center, Small, Medium, Large
 }
 
 @Composable
 internal fun TopAppBarDefaults.fromAppBarStyle(style: AppBarStyle): TopAppBarColors {
     return when (style) {
+        AppBarStyle.Center -> centerAlignedTopAppBarColors()
         AppBarStyle.Small -> smallTopAppBarColors()
         AppBarStyle.Medium -> mediumTopAppBarColors()
         AppBarStyle.Large -> largeTopAppBarColors()
