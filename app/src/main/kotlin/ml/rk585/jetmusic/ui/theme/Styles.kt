@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun textFieldColors(
     textColor: Color = LocalContentColor.current,
-    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(0.5f),
+    backgroundColor: Color = MaterialTheme.colorScheme.secondaryContainer.copy(0.5f),
     iconColor: Color = MaterialTheme.colorScheme.primary.copy(0.54f),
 ): TextFieldColors {
     return TextFieldDefaults.textFieldColors(
