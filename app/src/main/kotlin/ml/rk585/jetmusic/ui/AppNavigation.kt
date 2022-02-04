@@ -11,10 +11,17 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 import com.google.accompanist.navigation.material.bottomSheet
 import ml.rk585.jetmusic.ui.screens.home.HomeScreen
 import ml.rk585.jetmusic.ui.screens.player.PlayerSheet
+import ml.rk585.jetmusic.ui.screens.playlist.PlaylistScreen
 
 private sealed class Screen(val route: String) {
     object Search : Screen("search")
     object Player : Screen("player")
+
+    object Playlist : Screen("playlist/{playlistUrl}") {
+        fun createRoute(playlistUrl: String): String {
+            return "playlist/$playlistUrl"
+        }
+    }
 }
 
 @Composable
@@ -29,6 +36,7 @@ internal fun AppNavigation(
     ) {
         addSearch(navController)
         addPlayer(navController)
+        addPlaylist(navController)
     }
 }
 
@@ -39,6 +47,9 @@ private fun NavGraphBuilder.addSearch(navController: NavController) {
         HomeScreen(
             openPlayer = {
                 navController.navigate(Screen.Player.route)
+            },
+            openPlaylistDetail = { playlistUri ->
+                navController.navigate(Screen.Playlist.createRoute(playlistUri))
             }
         )
     }
@@ -51,6 +62,16 @@ private fun NavGraphBuilder.addPlayer(navController: NavController) {
     ) {
         PlayerSheet(
             onClose = navController::navigateUp
+        )
+    }
+}
+
+private fun NavGraphBuilder.addPlaylist(navController: NavController) {
+    composable(
+        route = Screen.Playlist.route
+    ) {
+        PlaylistScreen(
+            onNavigateUp = navController::navigateUp
         )
     }
 }

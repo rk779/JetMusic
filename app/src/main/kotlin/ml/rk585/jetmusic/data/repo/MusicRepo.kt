@@ -11,6 +11,7 @@ import ml.rk585.jetmusic.data.model.SearchType
 import ml.rk585.jetmusic.util.CoroutineDispatchers
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.ServiceList.YouTube
+import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeSearchQueryHandlerFactory
 import org.schabi.newpipe.extractor.stream.StreamExtractor
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
@@ -32,6 +33,14 @@ class MusicRepo @Inject constructor(
                 contentFilter,
                 null
             )
+            extractor.fetchPage()
+            extractor.initialPage.items ?: emptyList()
+        }
+    }
+
+    suspend fun getPlayList(url: String): List<StreamInfoItem> {
+        return withContext(dispatchers.network) {
+            val extractor = YouTube.getPlaylistExtractor(url)
             extractor.fetchPage()
             extractor.initialPage.items ?: emptyList()
         }

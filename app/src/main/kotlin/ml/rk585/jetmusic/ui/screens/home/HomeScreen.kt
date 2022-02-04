@@ -33,7 +33,8 @@ import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
-    openPlayer: () -> Unit
+    openPlayer: () -> Unit,
+    openPlaylistDetail: (String) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
@@ -72,6 +73,7 @@ fun HomeScreen(
                         onUpdateQuery = viewModel::updateQuery,
                         onUpdateType = viewModel::updateSearchType,
                         onPlayMusic = viewModel::playMusic,
+                        onPlaylistDetail = openPlaylistDetail,
                         items = items
                     )
                 }

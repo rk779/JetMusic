@@ -49,6 +49,7 @@ import ml.rk585.jetmusic.ui.components.SearchField
 import ml.rk585.jetmusic.ui.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.theme.textFieldColors
+import ml.rk585.jetmusic.util.toEncodedUri
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
@@ -60,6 +61,7 @@ fun SearchPage(
     onUpdateQuery: (String) -> Unit,
     onUpdateType: (SearchType) -> Unit,
     onPlayMusic: (StreamInfoItem) -> Unit,
+    onPlaylistDetail: (String) -> Unit,
     items: List<InfoItem> = emptyList()
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -83,7 +85,8 @@ fun SearchPage(
             modifier = Modifier.fillMaxSize(),
             items = items,
             snackbarHostState = snackbarHostState,
-            onPlayMusic = onPlayMusic
+            onPlayMusic = onPlayMusic,
+            onPlaylistDetail = onPlaylistDetail
         )
     }
 }
@@ -145,7 +148,8 @@ private fun DummyList(
     items: List<InfoItem> = emptyList(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     snackbarHostState: SnackbarHostState,
-    onPlayMusic: (StreamInfoItem) -> Unit
+    onPlayMusic: (StreamInfoItem) -> Unit,
+    onPlaylistDetail: (String) -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
@@ -185,11 +189,13 @@ private fun DummyList(
                     )
                 },
                 modifier = Modifier.clickable {
-                    if (item.infoType == InfoItem.InfoType.STREAM) {
-                        onPlayMusic(item as StreamInfoItem)
-                    } else {
-                        scope.launch {
-                            snackbarHostState.showSnackbar("Function not implemented")
+                    when (item.infoType) {
+                        InfoItem.InfoType.STREAM -> onPlayMusic(item as StreamInfoItem)
+                        InfoItem.InfoType.PLAYLIST -> onPlaylistDetail(item.url.toEncodedUri())
+                        else -> {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Function not implemented")
+                            }
                         }
                     }
                 }
