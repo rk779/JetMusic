@@ -16,31 +16,24 @@ android {
         versionName = "1.0"
     }
 
-    val keystoreConfigFile = rootProject.layout.projectDirectory.file("keystore.properties")
-    if (keystoreConfigFile.asFile.exists()) {
-        val contents = providers.fileContents(keystoreConfigFile).asText.forUseAtConfigurationTime()
-        val keystoreProperties = org.jetbrains.kotlin.konan.properties.Properties()
-        keystoreProperties.load(contents.get().byteInputStream())
-
-        signingConfigs {
-            register("release") {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String
-            }
-        }
-        buildTypes.all { signingConfig = signingConfigs.getByName("release") }
-    }
-
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+
+    applicationVariants.all {
+        val versionName = this.versionName
+        outputs.all {
+            if (name.contains("release")) {
+                val output = (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
+                output.outputFileName = "JetMusic-$versionName.apk"
+            }
         }
     }
 
