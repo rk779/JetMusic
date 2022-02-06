@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
 }
@@ -61,6 +62,17 @@ kapt {
     useBuildCache = true
 }
 
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
 dependencies {
     // Accompanist Libraries
     implementation(libs.bundles.accompanist)
@@ -79,6 +91,10 @@ dependencies {
     // Chucker Debugger
     debugImplementation(libs.chucker.debug)
     releaseImplementation(libs.chucker.release)
+
+    // Compose Destinations
+    implementation(libs.compose.destinations.core)
+    ksp(libs.compose.destinations.ksp)
 
     // Dependency Injection
     implementation(libs.dagger.hilt.android)

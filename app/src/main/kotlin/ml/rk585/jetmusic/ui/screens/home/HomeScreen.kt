@@ -22,23 +22,48 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.ui.components.JetMusicBottomNavigationBar
 import ml.rk585.jetmusic.ui.components.rememberFlowWithLifecycle
+import ml.rk585.jetmusic.ui.screens.destinations.PlayerSheetDestination
+import ml.rk585.jetmusic.ui.screens.destinations.PlaylistScreenDestination
 import ml.rk585.jetmusic.ui.screens.home.pages.LibraryPage
 import ml.rk585.jetmusic.ui.screens.home.pages.SearchPage
 import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
+@Destination(
+    start = true
+)
 @Composable
 fun HomeScreen(
+    navigator: DestinationsNavigator
+) {
+    HomeScreen(
+        viewModel = hiltViewModel(),
+        openPlayer = {
+            navigator.navigate(PlayerSheetDestination)
+        },
+        openPlaylistDetail = { playlistUrl ->
+            navigator.navigate(PlaylistScreenDestination(playlistUrl))
+        }
+    )
+}
+
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalPagerApi::class
+)
+@Composable
+private fun HomeScreen(
+    viewModel: HomeViewModel,
     openPlayer: () -> Unit,
     openPlaylistDetail: (String) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
-    val viewModel: HomeViewModel = hiltViewModel()
     val items by rememberFlowWithLifecycle(viewModel.state)
         .collectAsState(initial = emptyList())
     val searchQuery by rememberFlowWithLifecycle(viewModel.query)

@@ -5,6 +5,7 @@ coil = "2.0.0-alpha06"
 compose = "1.2.0-alpha02"
 coroutines = "1.6.0"
 dagger = "2.40.5"
+destinations = "1.2.2-beta"
 kotlin = "1.6.10"
 lifecycle = "2.5.0-alpha01"
 media3 = "1.0.0-alpha01"
@@ -61,6 +62,10 @@ chucker-release = { module = "com.github.chuckerteam.chucker:library-no-op", ver
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
+# Compose destinations
+compose-destinations-core = { module = "io.github.raamcosta.compose-destinations:animations-core", version.ref = "destinations" }
+compose-destinations-ksp = { module = "io.github.raamcosta.compose-destinations:ksp", version.ref = "destinations" }
+
 # Dependency Injection
 dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
@@ -70,6 +75,9 @@ dagger-hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plu
 kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+
+# KSP
+ksp-pluginGradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version = "1.6.10-1.0.2" }
 
 # NewPipe Extractor
 newpipe-extractor = { module = "com.github.TeamNewPipe.NewPipeExtractor:NewPipeExtractor", version = "v0.21.13" }

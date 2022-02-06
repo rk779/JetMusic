@@ -32,18 +32,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.navigationBarsPadding
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.ui.components.JetImage
 import ml.rk585.jetmusic.ui.components.JetMusicTopAppBar
 import ml.rk585.jetmusic.ui.components.rememberFlowWithLifecycle
 
+@Destination
 @Composable
 fun PlaylistScreen(
-    onNavigateUp: () -> Unit
+    navigator: DestinationsNavigator,
+    playlistUrl: String
 ) {
     PlaylistScreen(
         viewModel = hiltViewModel(),
-        onNavigateUp = onNavigateUp
+        onNavigateUp = navigator::navigateUp
     )
 }
 

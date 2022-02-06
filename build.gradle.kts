@@ -10,5 +10,6 @@ buildscript {
         classpath(libs.android.pluginGradle)
         classpath(libs.dagger.hilt.pluginGradle)
         classpath(libs.kotlin.pluginGradle)
+        classpath(libs.ksp.pluginGradle)
     }
 }

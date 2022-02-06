@@ -25,6 +25,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.DestinationStyle
 import ml.rk585.jetmusic.data.service.MusicService
 import ml.rk585.jetmusic.ui.components.AppBarStyle
 import ml.rk585.jetmusic.ui.components.FullScreenLoading
@@ -35,9 +38,12 @@ import ml.rk585.jetmusic.ui.screens.player.components.PlaybackArtworkPagerWithNo
 import ml.rk585.jetmusic.util.ADAPTIVE_COLOR_ANIMATION
 import ml.rk585.jetmusic.util.adaptiveColor
 
+@Destination(
+    style = DestinationStyle.BottomSheet::class
+)
 @Composable
 fun PlayerSheet(
-    onClose: () -> Unit
+    navigator: DestinationsNavigator
 ) {
     val player by rememberMediaSessionPlayer(MusicService::class.java)
 
@@ -45,7 +51,7 @@ fun PlayerSheet(
         true -> {
             PlayerSheetContent(
                 player = player!!,
-                onClose = onClose
+                onClose = navigator::navigateUp
             )
         }
         false -> {
