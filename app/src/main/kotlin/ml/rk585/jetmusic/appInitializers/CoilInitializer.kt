@@ -28,7 +28,7 @@ class CoilInitializer @Inject constructor(
             .build()
 
         val diskCache = DiskCache.Builder(context)
-            .directory(context.filesDir.resolve("image_cache"))
+            .directory(context.cacheDir.resolve("image_cache"))
             .maxSizeBytes(25L * 1024 * 1024) // 25MB
             .build()
 
@@ -36,8 +36,7 @@ class CoilInitializer @Inject constructor(
             ImageLoader.Builder(application)
                 .diskCache(diskCache)
                 .okHttpClient(coilOkHttpClient)
-                .fetcherDispatcher(dispatchers.network)
-                .decoderDispatcher(dispatchers.io)
+                .dispatcher(dispatchers.io)
                 .build()
         }
     }
