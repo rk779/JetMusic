@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -42,6 +43,9 @@ import androidx.compose.material3.MaterialTheme as MaterialTheme3
 val ADAPTIVE_COLOR_ANIMATION: AnimationSpec<Color> = tween(easing = FastOutSlowInEasing)
 
 data class AdaptiveColorResult(val color: Color, val contentColor: Color, val gradient: Brush)
+
+val LocalAdaptiveColorResult =
+    staticCompositionLocalOf<AdaptiveColorResult> { error("AdaptiveColorResult  not provided") }
 
 private val adaptiveColorCache = mutableMapOf<String, Color>()
 

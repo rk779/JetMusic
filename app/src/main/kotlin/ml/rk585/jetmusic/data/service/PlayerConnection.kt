@@ -2,6 +2,7 @@ package ml.rk585.jetmusic.data.service
 
 import android.content.ComponentName
 import android.content.Context
+import android.provider.MediaStore
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
@@ -13,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 
 interface PlayerConnection {
     fun play(mediaItem: MediaItem)
+    fun play(mediaItems: List<MediaItem>)
     fun releaseMediaController()
 }
 
@@ -30,6 +32,12 @@ class PlayerConnectionImpl(
 
     override fun play(mediaItem: MediaItem) {
         mediaController.setMediaItem(mediaItem)
+        mediaController.prepare()
+        mediaController.play()
+    }
+
+    override fun play(mediaItems: List<MediaItem>) {
+        mediaController.setMediaItems(mediaItems)
         mediaController.prepare()
         mediaController.play()
     }

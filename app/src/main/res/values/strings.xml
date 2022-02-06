@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">JetMusic</string>
+
+    <string name="music_artist_name">Music • %s</string>
+    <plurals name="music_count_duration">
+        <item quantity="one">%1$d song • %2$s</item>
+        <item quantity="other">%1$d songs • %2$s</item>
+    </plurals>
 </resources>

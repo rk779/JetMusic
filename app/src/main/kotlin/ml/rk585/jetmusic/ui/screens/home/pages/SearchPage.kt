@@ -49,8 +49,8 @@ import ml.rk585.jetmusic.ui.components.SearchField
 import ml.rk585.jetmusic.ui.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.theme.textFieldColors
-import ml.rk585.jetmusic.util.toEncodedUri
 import org.schabi.newpipe.extractor.InfoItem
+import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +61,7 @@ fun SearchPage(
     onUpdateQuery: (String) -> Unit,
     onUpdateType: (SearchType) -> Unit,
     onPlayMusic: (StreamInfoItem) -> Unit,
-    onPlaylistDetail: (String) -> Unit,
+    onPlaylistDetail: (PlaylistInfoItem) -> Unit,
     items: List<InfoItem> = emptyList()
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -149,7 +149,7 @@ private fun DummyList(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     snackbarHostState: SnackbarHostState,
     onPlayMusic: (StreamInfoItem) -> Unit,
-    onPlaylistDetail: (String) -> Unit
+    onPlaylistDetail: (PlaylistInfoItem) -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
@@ -170,13 +170,15 @@ private fun DummyList(
                 secondaryText = {
                     Text(
                         text = when (item.infoType) {
-                            InfoItem.InfoType.STREAM -> "Music"
-                            InfoItem.InfoType.PLAYLIST -> "Playlist"
-                            InfoItem.InfoType.CHANNEL -> "Channel"
+                            InfoItem.InfoType.STREAM -> "Music • ${(item as StreamInfoItem).uploaderName}"
+                            InfoItem.InfoType.PLAYLIST -> "Playlist • ${(item as PlaylistInfoItem).uploaderName}"
+                            InfoItem.InfoType.CHANNEL -> "Artist"
                             else -> ""
                         },
                         style = MaterialTheme.typography.bodyMedium,
-                        color = LocalContentColor.current.copy(ContentAlpha.medium)
+                        color = LocalContentColor.current.copy(ContentAlpha.medium),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 },
                 icon = {
@@ -191,7 +193,7 @@ private fun DummyList(
                 modifier = Modifier.clickable {
                     when (item.infoType) {
                         InfoItem.InfoType.STREAM -> onPlayMusic(item as StreamInfoItem)
-                        InfoItem.InfoType.PLAYLIST -> onPlaylistDetail(item.url.toEncodedUri())
+                        InfoItem.InfoType.PLAYLIST -> onPlaylistDetail(item as PlaylistInfoItem)
                         else -> {
                             scope.launch {
                                 snackbarHostState.showSnackbar("Function not implemented")

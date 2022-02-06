@@ -59,6 +59,7 @@ class MusicService : MediaLibraryService() {
             mediaItem: MediaItem
         ): MediaItem {
             return mediaItem.buildUpon()
+                .setMediaId(mediaItem.mediaId)
                 .setUri(mediaItem.mediaMetadata.mediaUri)
                 .setMediaMetadata(mediaItem.mediaMetadata)
                 .build()

@@ -33,6 +33,7 @@ import ml.rk585.jetmusic.ui.screens.destinations.PlaylistScreenDestination
 import ml.rk585.jetmusic.ui.screens.home.pages.LibraryPage
 import ml.rk585.jetmusic.ui.screens.home.pages.SearchPage
 import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
+import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 
 @Destination(
     start = true
@@ -46,8 +47,15 @@ fun HomeScreen(
         openPlayer = {
             navigator.navigate(PlayerSheetDestination)
         },
-        openPlaylistDetail = { playlistUrl ->
-            navigator.navigate(PlaylistScreenDestination(playlistUrl))
+        openPlaylistDetail = { playlistInfoItem ->
+            navigator.navigate(
+                PlaylistScreenDestination(
+                    name = playlistInfoItem.name,
+                    artistName = playlistInfoItem.uploaderName,
+                    artworkUrl = playlistInfoItem.thumbnailUrl,
+                    playlistUrl = playlistInfoItem.url
+                )
+            )
         }
     )
 }
@@ -60,7 +68,7 @@ fun HomeScreen(
 private fun HomeScreen(
     viewModel: HomeViewModel,
     openPlayer: () -> Unit,
-    openPlaylistDetail: (String) -> Unit
+    openPlaylistDetail: (PlaylistInfoItem) -> Unit
 ) {
     val pagerState = rememberPagerState()
 
