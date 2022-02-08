@@ -2,7 +2,9 @@ package ml.rk585.jetmusic.data.repo
 
 import androidx.media3.common.MediaItem
 import kotlinx.coroutines.withContext
+import ml.rk585.jetmusic.data.mappers.ChannelExtractorToArtist
 import ml.rk585.jetmusic.data.mappers.StreamExtractorToMediaItem
+import ml.rk585.jetmusic.data.model.Artist
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.data.model.SearchType
 import ml.rk585.jetmusic.util.CoroutineDispatchers
@@ -14,6 +16,7 @@ import javax.inject.Inject
 
 class MusicRepo @Inject constructor(
     private val dispatchers: CoroutineDispatchers,
+    private val artistMapper: ChannelExtractorToArtist,
     private val streamMapper: StreamExtractorToMediaItem
 ) {
     suspend fun search(searchQuery: SearchQuery): List<InfoItem> {
@@ -31,6 +34,16 @@ class MusicRepo @Inject constructor(
             )
             extractor.fetchPage()
             extractor.initialPage.items ?: emptyList()
+        }
+    }
+
+    suspend fun getArtist(url: String): Artist {
+        return withContext(dispatchers.network) {
+            val extractor = YouTube.getChannelExtractor(url)
+            extractor.fetchPage()
+            val feedExtractor = YouTube.getFeedExtractor(extractor.url)
+            feedExtractor.fetchPage()
+            artistMapper.map(Pair(extractor, feedExtractor))
         }
     }
 

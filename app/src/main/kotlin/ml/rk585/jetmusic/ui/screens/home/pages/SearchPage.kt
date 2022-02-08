@@ -50,6 +50,7 @@ import ml.rk585.jetmusic.ui.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
+import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
@@ -60,6 +61,7 @@ fun SearchPage(
     searchQuery: SearchQuery,
     onUpdateQuery: (String) -> Unit,
     onUpdateType: (SearchType) -> Unit,
+    onArtistDetail: (ChannelInfoItem) -> Unit,
     onPlayMusic: (StreamInfoItem) -> Unit,
     onPlaylistDetail: (PlaylistInfoItem) -> Unit,
     items: List<InfoItem> = emptyList()
@@ -85,6 +87,7 @@ fun SearchPage(
             modifier = Modifier.fillMaxSize(),
             items = items,
             snackbarHostState = snackbarHostState,
+            onArtistDetail = onArtistDetail,
             onPlayMusic = onPlayMusic,
             onPlaylistDetail = onPlaylistDetail
         )
@@ -148,6 +151,7 @@ private fun DummyList(
     items: List<InfoItem> = emptyList(),
     contentPadding: PaddingValues = PaddingValues(0.dp),
     snackbarHostState: SnackbarHostState,
+    onArtistDetail: (ChannelInfoItem) -> Unit,
     onPlayMusic: (StreamInfoItem) -> Unit,
     onPlaylistDetail: (PlaylistInfoItem) -> Unit
 ) {
@@ -194,6 +198,7 @@ private fun DummyList(
                     when (item.infoType) {
                         InfoItem.InfoType.STREAM -> onPlayMusic(item as StreamInfoItem)
                         InfoItem.InfoType.PLAYLIST -> onPlaylistDetail(item as PlaylistInfoItem)
+                        InfoItem.InfoType.CHANNEL -> onArtistDetail(item as ChannelInfoItem)
                         else -> {
                             scope.launch {
                                 snackbarHostState.showSnackbar("Function not implemented")

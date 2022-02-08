@@ -28,11 +28,13 @@ import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.ui.components.JetMusicBottomNavigationBar
 import ml.rk585.jetmusic.ui.components.rememberFlowWithLifecycle
+import ml.rk585.jetmusic.ui.screens.destinations.ArtistScreenDestination
 import ml.rk585.jetmusic.ui.screens.destinations.PlayerSheetDestination
 import ml.rk585.jetmusic.ui.screens.destinations.PlaylistScreenDestination
 import ml.rk585.jetmusic.ui.screens.home.pages.LibraryPage
 import ml.rk585.jetmusic.ui.screens.home.pages.SearchPage
 import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
+import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 
 @Destination(
@@ -44,6 +46,15 @@ fun HomeScreen(
 ) {
     HomeScreen(
         viewModel = hiltViewModel(),
+        onArtistDetail = { channelInfoItem ->
+            navigator.navigate(
+                ArtistScreenDestination(
+                    artistName = channelInfoItem.name,
+                    artistUrl = channelInfoItem.url,
+                    artworkUrl = channelInfoItem.thumbnailUrl
+                )
+            )
+        },
         openPlayer = {
             navigator.navigate(PlayerSheetDestination)
         },
@@ -67,6 +78,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreen(
     viewModel: HomeViewModel,
+    onArtistDetail: (ChannelInfoItem) -> Unit,
     openPlayer: () -> Unit,
     openPlaylistDetail: (PlaylistInfoItem) -> Unit
 ) {
@@ -105,6 +117,7 @@ private fun HomeScreen(
                         searchQuery = searchQuery,
                         onUpdateQuery = viewModel::updateQuery,
                         onUpdateType = viewModel::updateSearchType,
+                        onArtistDetail = onArtistDetail,
                         onPlayMusic = viewModel::playMusic,
                         onPlaylistDetail = openPlaylistDetail,
                         items = items
