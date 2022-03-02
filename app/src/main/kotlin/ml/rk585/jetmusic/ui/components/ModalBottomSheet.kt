@@ -1,6 +1,5 @@
 package ml.rk585.jetmusic.ui.components
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.contentColorFor
@@ -16,10 +15,7 @@ import com.google.accompanist.navigation.material.BottomSheetNavigator
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 
-@OptIn(
-    ExperimentalMaterialNavigationApi::class,
-    ExperimentalMaterialApi::class
-)
+@OptIn(ExperimentalMaterialNavigationApi::class)
 @Composable
 fun ModalBottomSheetLayout(
     bottomSheetNavigator: BottomSheetNavigator,

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.SliderDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayCircleFilled
@@ -25,6 +24,8 @@ import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -42,8 +43,6 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import ml.rk585.jetmusic.ui.components.IconButton
 import ml.rk585.jetmusic.ui.components.JetImage
-import ml.rk585.jetmusic.ui.components.Slider
-import ml.rk585.jetmusic.ui.components.m3Colors
 import ml.rk585.jetmusic.ui.components.rememberCurrentMediaItem
 import ml.rk585.jetmusic.ui.components.rememberPlayProgress
 import ml.rk585.jetmusic.util.formatAsPlayerTime
@@ -254,7 +253,7 @@ private fun PlayerProgressSlider(
                         .coerceAtLeast(0L)
                 )
             },
-            colors = SliderDefaults.m3Colors(
+            colors = SliderDefaults.colors(
                 thumbColor = LocalContentColor.current,
                 activeTrackColor = LocalContentColor.current,
                 inactiveTrackColor = LocalContentColor.current.copy(0.12f)

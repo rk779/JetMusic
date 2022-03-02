@@ -2,7 +2,6 @@ package ml.rk585.jetmusic.data.service
 
 import android.content.ComponentName
 import android.content.Context
-import android.provider.MediaStore
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem

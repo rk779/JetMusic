@@ -1,7 +1,6 @@
 package ml.rk585.jetmusic.ui.components
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -21,7 +20,6 @@ import androidx.compose.ui.unit.dp
 private val RippleRadius = 24.dp
 private val IconButtonSizeModifier = Modifier.size(48.dp)
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun IconButton(
     onClick: () -> Unit,
@@ -34,7 +32,7 @@ fun IconButton(
 ) {
     Box(
         modifier = modifier
-            .combinedClickable(
+            .clickable(
                 onClick = onClick,
                 enabled = enabled,
                 role = Role.Button,

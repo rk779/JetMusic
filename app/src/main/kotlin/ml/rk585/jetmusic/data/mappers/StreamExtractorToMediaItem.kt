@@ -23,6 +23,7 @@ class StreamExtractorToMediaItem @Inject constructor() : Mapper<StreamExtractor,
         return MediaItem.Builder()
             .setMediaId(from.id)
             .setMediaMetadata(mediaMetadata)
+            .setUri(getBestStreamUri(from))
             .build()
     }
 
