@@ -2,7 +2,6 @@ package ml.rk585.jetmusic.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -12,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
@@ -21,12 +21,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Chip(
     onClick: () -> Unit,
@@ -47,13 +46,9 @@ fun Chip(
     val containerColor by animateColorAsState(targetValue = backgroundColor)
 
     Surface(
-        modifier = modifier
-            .clip(shape)
-            .clickable(
-                enabled = enabled,
-                onClick = onClick,
-                role = Role.Button
-            ),
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
         shape = shape,
         color = containerColor,
         tonalElevation = tonalElevation,

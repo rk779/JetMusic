@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdk = 32
+    namespace = "ml.rk585.jetmusic"
 
     defaultConfig {
         applicationId = "ml.rk585.jetmusic"

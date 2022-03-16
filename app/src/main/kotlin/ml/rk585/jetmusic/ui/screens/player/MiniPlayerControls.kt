@@ -6,8 +6,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
@@ -23,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.LocalContentColor
@@ -115,7 +114,7 @@ private fun MiniPlayerControls(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MiniPlayerControls(
     modifier: Modifier = Modifier,
@@ -135,16 +134,13 @@ private fun MiniPlayerControls(
     var dragOffset by remember { mutableStateOf(0f) }
 
     Surface(
+        onClick = openPlayerSheet,
         color = backgroundColor,
         contentColor = contentColor,
         shape = RoundedCornerShape(8.dp),
         modifier = modifier
             .padding(horizontal = 8.dp)
             .animateContentSize()
-            .combinedClickable(
-                enabled = true,
-                onClick = openPlayerSheet
-            )
             .draggable(
                 orientation = Orientation.Vertical,
                 state = rememberDraggableState(
