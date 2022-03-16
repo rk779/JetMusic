@@ -27,7 +27,7 @@ class CoilInitializer @Inject constructor(
             .dispatcher(dispatcher)
             .build()
 
-        val diskCache = DiskCache.Builder(context)
+        val diskCache = DiskCache.Builder()
             .directory(context.cacheDir.resolve("image_cache"))
             .maxSizeBytes(25L * 1024 * 1024) // 25MB
             .build()

@@ -21,14 +21,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.VectorPainter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isSpecified
-import coil.compose.AsyncImage
-import coil.compose.AsyncImageContent
 import coil.compose.AsyncImagePainter
-import coil.request.ImageRequest
+import coil.compose.SubcomposeAsyncImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
@@ -46,7 +43,6 @@ fun JetImage(
     size: Dp = Dp.Unspecified,
     shape: Shape = RectangleShape
 ) {
-    val context = LocalContext.current
     val iconPadding = if (size.isSpecified) size * 0.25f else 24.dp
     val sizeModifier = if (size.isSpecified) Modifier.size(size) else Modifier
 
@@ -58,42 +54,59 @@ fun JetImage(
         color = containerColor,
         tonalElevation = tonalElevation
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context)
-                .data(data)
-                .build(),
+        SubcomposeAsyncImage(
+            model = data,
             contentDescription = contentDescription,
-            contentScale = contentScale
-        ) { state ->
-            when (state) {
-                is AsyncImagePainter.State.Error,
-                is AsyncImagePainter.State.Empty,
-                is AsyncImagePainter.State.Loading -> {
-                    Icon(
-                        painter = backgroundIcon,
-                        contentDescription = null,
-                        tint = contentColor.copy(alpha = ContentAlpha.disabled),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(containerColor)
-                            .padding(iconPadding)
-                    )
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .placeholder(
-                                visible = state is AsyncImagePainter.State.Loading,
-                                shape = shape,
-                                highlight = PlaceholderHighlight.shimmer()
-                            )
-                    )
-                }
-                is AsyncImagePainter.State.Success -> {
-                    AsyncImageContent(
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
+            contentScale = contentScale,
+            loading = {
+                BackgroundIcon(
+                    painter = backgroundIcon,
+                    contentColor = contentColor,
+                    containerColor = containerColor,
+                    iconPadding = iconPadding,
+                    shape = shape,
+                    loading = painter.state is AsyncImagePainter.State.Loading
+                )
+            },
+            error = {
+                BackgroundIcon(
+                    painter = backgroundIcon,
+                    contentColor = contentColor,
+                    containerColor = containerColor,
+                    iconPadding = iconPadding,
+                    shape = shape,
+                    loading = false
+                )
             }
-        }
+        )
     }
+}
+
+@Composable
+private fun BackgroundIcon(
+    painter: VectorPainter,
+    contentColor: Color,
+    containerColor: Color,
+    iconPadding: Dp,
+    shape: Shape,
+    loading: Boolean
+) {
+    Icon(
+        painter = painter,
+        contentDescription = null,
+        tint = contentColor.copy(alpha = ContentAlpha.disabled),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(containerColor)
+            .padding(iconPadding)
+    )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .placeholder(
+                visible = loading,
+                shape = shape,
+                highlight = PlaceholderHighlight.shimmer()
+            )
+    )
 }
