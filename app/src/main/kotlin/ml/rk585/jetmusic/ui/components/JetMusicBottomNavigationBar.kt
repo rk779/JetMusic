@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.MaterialTheme
@@ -17,8 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 
 val BottomBarElevationDefault = 3.dp
 private val BottomNavigationBarHeight = 80.dp
@@ -26,9 +27,7 @@ private val BottomNavigationBarHeight = 80.dp
 @Composable
 fun JetMusicBottomNavigationBar(
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = rememberInsetsPaddingValues(
-        insets = LocalWindowInsets.current.navigationBars
-    ),
+    contentPadding: PaddingValues = WindowInsets.navigationBars.asPaddingValues(),
     containerColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(containerColor),
     tonalElevation: Dp = BottomBarElevationDefault,

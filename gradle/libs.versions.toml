@@ -12,7 +12,6 @@ media3 = "1.0.0-alpha03"
 
 [libraries]
 # Accompanist libraries
-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
@@ -89,7 +88,7 @@ okHttp3-okHttp = { module = "com.squareup.okhttp3:okhttp", version = "4.9.3" }
 logcat-lib = { module = "com.squareup.logcat:logcat", version = "0.1" }
 
 [bundles]
-accompanist = ["accompanist-insets", "accompanist-navigation-material", "accompanist-pager", "accompanist-placeholder-material", "accompanist-systemUiController"]
+accompanist = ["accompanist-navigation-material", "accompanist-pager", "accompanist-placeholder-material", "accompanist-systemUiController"]
 androidx-compose = ["androidx-compose-activity", "androidx-compose-material3", "androidx-compose-material", "androidx-compose-material-icons", "androidx-compose-runtime", "androidx-compose-ui"]
 androidx-lifecycle = ["androidx-lifecycle-process", "androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewModel-compose", "androidx-lifecycle-viewModel-ktx"]
 androidx-media = ["androidx-media-common", "androidx-media-datasource-okHttp", "androidx-media-exoplayer", "androidx-media-exoplayer-dash", "androidx-media-exoplayer-hls", "androidx-media-session", "androidx-media-ui"]

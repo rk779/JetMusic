@@ -2,7 +2,10 @@ package ml.rk585.jetmusic.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MediumTopAppBar
@@ -14,17 +17,12 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 
 @Composable
 fun JetMusicTopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = rememberInsetsPaddingValues(
-        insets = LocalWindowInsets.current.statusBars,
-        applyBottom = false
-    ),
+    contentPadding: PaddingValues = WindowInsets.statusBars.asPaddingValues(),
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
     appBarStyle: AppBarStyle = AppBarStyle.Medium,
