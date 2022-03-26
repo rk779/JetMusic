@@ -41,10 +41,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
-import ml.rk585.jetmusic.ui.components.IconButton
-import ml.rk585.jetmusic.ui.components.JetImage
-import ml.rk585.jetmusic.ui.components.rememberCurrentMediaItem
-import ml.rk585.jetmusic.ui.components.rememberPlayProgress
+import ml.rk585.jetmusic.ui.common.components.IconButton
+import ml.rk585.jetmusic.ui.common.components.JetImage
+import ml.rk585.jetmusic.ui.common.components.rememberCurrentMediaItem
+import ml.rk585.jetmusic.ui.common.components.rememberPlayProgress
 import ml.rk585.jetmusic.util.formatAsPlayerTime
 import ml.rk585.jetmusic.util.playPause
 import ml.rk585.jetmusic.util.toggleRepeatMode

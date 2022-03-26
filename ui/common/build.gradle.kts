@@ -19,9 +19,19 @@ android {
 
 dependencies {
     // Accompanist Libraries
+    implementation(libs.accompanist.navigation.material)
+    implementation(libs.accompanist.placeholder.material)
     implementation(libs.accompanist.systemUiController)
 
     // AndroidX Libraries
+    implementation(libs.androidx.media.common)
+    implementation(libs.androidx.media.session)
     implementation(libs.bundles.androidx.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // Image Loading
+    implementation(libs.coil.compose)
+
+    // Projects
+    implementation(projects.core.base)
 }

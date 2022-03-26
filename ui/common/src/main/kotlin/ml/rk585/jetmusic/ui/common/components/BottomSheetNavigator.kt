@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.components
+package ml.rk585.jetmusic.ui.common.components
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.material.ExperimentalMaterialApi

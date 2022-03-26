@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.components
+package ml.rk585.jetmusic.ui.common.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -38,7 +38,7 @@ fun JetImage(
     containerColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(containerColor),
     contentScale: ContentScale = ContentScale.None,
-    tonalElevation: Dp = BottomBarElevationDefault,
+    tonalElevation: Dp = BottomNavigationBarDefaults.Elevation,
     backgroundIcon: VectorPainter = rememberVectorPainter(Icons.Default.MusicNote),
     size: Dp = Dp.Unspecified,
     shape: Shape = RectangleShape

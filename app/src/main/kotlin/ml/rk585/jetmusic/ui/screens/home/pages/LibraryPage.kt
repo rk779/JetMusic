@@ -20,8 +20,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import kotlinx.coroutines.launch
-import ml.rk585.jetmusic.ui.components.AppBarStyle
-import ml.rk585.jetmusic.ui.components.JetMusicTopAppBar
+import ml.rk585.jetmusic.ui.common.components.AppBarStyle
+import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

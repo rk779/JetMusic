@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.components
+package ml.rk585.jetmusic.ui.common.components
 
 import android.content.ComponentName
 import androidx.compose.runtime.Composable

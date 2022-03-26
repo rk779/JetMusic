@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.util
+package ml.rk585.jetmusic.core.base.util
 
 import kotlinx.coroutines.CoroutineDispatcher
 

@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.components
+package ml.rk585.jetmusic.ui.common.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,8 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-val BottomBarElevationDefault = 3.dp
-private val BottomNavigationBarHeight = 80.dp
+object BottomNavigationBarDefaults {
+    val Elevation = 3.dp
+    val Height = 80.dp
+}
 
 @Composable
 fun JetMusicBottomNavigationBar(
@@ -30,7 +32,7 @@ fun JetMusicBottomNavigationBar(
     contentPadding: PaddingValues = WindowInsets.navigationBars.asPaddingValues(),
     containerColor: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(containerColor),
-    tonalElevation: Dp = BottomBarElevationDefault,
+    tonalElevation: Dp = BottomNavigationBarDefaults.Elevation,
     content: @Composable RowScope.() -> Unit
 ) {
     Surface(
@@ -43,7 +45,7 @@ fun JetMusicBottomNavigationBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(contentPadding)
-                .height(BottomNavigationBarHeight)
+                .height(BottomNavigationBarDefaults.Height)
                 .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,

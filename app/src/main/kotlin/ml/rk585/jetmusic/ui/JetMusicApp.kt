@@ -7,8 +7,8 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import ml.rk585.jetmusic.ui.components.ModalBottomSheetLayout
-import ml.rk585.jetmusic.ui.components.rememberBottomSheetNavigator
+import ml.rk585.jetmusic.ui.common.components.ModalBottomSheetLayout
+import ml.rk585.jetmusic.ui.common.components.rememberBottomSheetNavigator
 import ml.rk585.jetmusic.ui.screens.NavGraphs
 import ml.rk585.jetmusic.ui.common.theme.JetMusicTheme
 

@@ -45,11 +45,11 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import ml.rk585.jetmusic.data.service.MusicService
-import ml.rk585.jetmusic.ui.components.IconButton
-import ml.rk585.jetmusic.ui.components.JetImage
-import ml.rk585.jetmusic.ui.components.rememberCurrentMediaItem
-import ml.rk585.jetmusic.ui.components.rememberMediaSessionPlayer
-import ml.rk585.jetmusic.ui.components.rememberPlayProgress
+import ml.rk585.jetmusic.ui.common.components.IconButton
+import ml.rk585.jetmusic.ui.common.components.JetImage
+import ml.rk585.jetmusic.ui.common.components.rememberCurrentMediaItem
+import ml.rk585.jetmusic.ui.common.components.rememberMediaSessionPlayer
+import ml.rk585.jetmusic.ui.common.components.rememberPlayProgress
 import ml.rk585.jetmusic.util.adaptiveColor
 import ml.rk585.jetmusic.util.playPause
 

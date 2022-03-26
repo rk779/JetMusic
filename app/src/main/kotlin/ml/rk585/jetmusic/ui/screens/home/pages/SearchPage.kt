@@ -44,10 +44,10 @@ import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.R
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.data.model.SearchType
-import ml.rk585.jetmusic.ui.components.JetImage
-import ml.rk585.jetmusic.ui.components.SearchField
-import ml.rk585.jetmusic.ui.components.SelectableChipRow
-import ml.rk585.jetmusic.ui.components.SmallTopAppBar
+import ml.rk585.jetmusic.ui.common.components.JetImage
+import ml.rk585.jetmusic.ui.common.components.SearchField
+import ml.rk585.jetmusic.ui.common.components.SelectableChipRow
+import ml.rk585.jetmusic.ui.common.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.common.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem

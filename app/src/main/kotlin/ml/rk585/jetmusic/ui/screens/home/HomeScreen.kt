@@ -26,8 +26,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.data.model.SearchQuery
-import ml.rk585.jetmusic.ui.components.JetMusicBottomNavigationBar
-import ml.rk585.jetmusic.ui.components.rememberFlowWithLifecycle
+import ml.rk585.jetmusic.ui.common.components.JetMusicBottomNavigationBar
+import ml.rk585.jetmusic.ui.common.components.rememberFlowWithLifecycle
 import ml.rk585.jetmusic.ui.screens.destinations.ArtistScreenDestination
 import ml.rk585.jetmusic.ui.screens.destinations.PlayerSheetDestination
 import ml.rk585.jetmusic.ui.screens.destinations.PlaylistScreenDestination
@@ -37,9 +37,7 @@ import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 
-@Destination(
-    start = true
-)
+@Destination(start = true)
 @Composable
 fun HomeScreen(
     navigator: DestinationsNavigator

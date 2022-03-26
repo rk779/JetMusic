@@ -4,15 +4,13 @@ import android.app.Application
 import android.content.Context
 import coil.Coil
 import coil.ImageLoader
-import coil.annotation.ExperimentalCoilApi
 import coil.disk.DiskCache
 import dagger.hilt.android.qualifiers.ApplicationContext
-import ml.rk585.jetmusic.util.CoroutineDispatchers
+import ml.rk585.jetmusic.core.base.util.CoroutineDispatchers
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
-@OptIn(ExperimentalCoilApi::class)
 class CoilInitializer @Inject constructor(
     @ApplicationContext private val context: Context,
     private val dispatchers: CoroutineDispatchers,

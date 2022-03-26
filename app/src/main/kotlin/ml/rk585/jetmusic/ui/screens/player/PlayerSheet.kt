@@ -29,18 +29,16 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.spec.DestinationStyle
 import ml.rk585.jetmusic.data.service.MusicService
-import ml.rk585.jetmusic.ui.components.AppBarStyle
-import ml.rk585.jetmusic.ui.components.FullScreenLoading
-import ml.rk585.jetmusic.ui.components.JetMusicTopAppBar
-import ml.rk585.jetmusic.ui.components.rememberCurrentMediaItem
-import ml.rk585.jetmusic.ui.components.rememberMediaSessionPlayer
+import ml.rk585.jetmusic.ui.common.components.AppBarStyle
+import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
+import ml.rk585.jetmusic.ui.common.components.FullScreenLoading
+import ml.rk585.jetmusic.ui.common.components.rememberCurrentMediaItem
+import ml.rk585.jetmusic.ui.common.components.rememberMediaSessionPlayer
 import ml.rk585.jetmusic.ui.screens.player.components.PlaybackArtworkPagerWithNowPlayingAndControls
 import ml.rk585.jetmusic.util.ADAPTIVE_COLOR_ANIMATION
 import ml.rk585.jetmusic.util.adaptiveColor
 
-@Destination(
-    style = DestinationStyle.BottomSheet::class
-)
+@Destination(style = DestinationStyle.BottomSheet::class)
 @Composable
 fun PlayerSheet(
     navigator: DestinationsNavigator

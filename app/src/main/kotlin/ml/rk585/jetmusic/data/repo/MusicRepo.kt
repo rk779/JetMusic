@@ -7,7 +7,7 @@ import ml.rk585.jetmusic.data.mappers.StreamExtractorToMediaItem
 import ml.rk585.jetmusic.data.model.Artist
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.data.model.SearchType
-import ml.rk585.jetmusic.util.CoroutineDispatchers
+import ml.rk585.jetmusic.core.base.util.CoroutineDispatchers
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.ServiceList.YouTube
 import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeSearchQueryHandlerFactory

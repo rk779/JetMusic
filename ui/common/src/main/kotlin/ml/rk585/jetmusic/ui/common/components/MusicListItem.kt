@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.components
+package ml.rk585.jetmusic.ui.common.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.CircleShape
@@ -14,7 +14,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import ml.rk585.jetmusic.R
+import ml.rk585.jetmusic.ui.common.R
+import ml.rk585.jetmusic.ui.common.components.JetImage
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
 @OptIn(ExperimentalMaterialApi::class)
