@@ -1,7 +1,7 @@
 package ml.rk585.jetmusic.ui.theme
 
-import androidx.compose.material.TextFieldColors
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -20,7 +20,7 @@ fun textFieldColors(
         unfocusedIndicatorColor = Color.Transparent,
         disabledIndicatorColor = Color.Transparent,
         errorIndicatorColor = Color.Transparent,
-        leadingIconColor = iconColor,
-        trailingIconColor = iconColor
+        focusedLeadingIconColor = iconColor,
+        focusedTrailingIconColor = iconColor
     )
 }

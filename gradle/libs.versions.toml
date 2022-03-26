@@ -1,13 +1,13 @@
 [versions]
-accompanist = "0.24.4-alpha"
+accompanist = "0.24.5-alpha"
 chucker = "3.5.2"
-coil = "2.0.0-rc01"
-compose = "1.2.0-alpha05"
+coil = "2.0.0-rc02"
+compose = "1.2.0-alpha06"
 coroutines = "1.6.0"
 dagger = "2.41"
-destinations = "1.3.4-beta"
+destinations = "1.3.5-beta"
 kotlin = "1.6.10"
-lifecycle = "2.5.0-alpha04"
+lifecycle = "2.5.0-alpha05"
 media3 = "1.0.0-alpha03"
 
 [libraries]
@@ -18,11 +18,12 @@ accompanist-placeholder-material = { module = "com.google.accompanist:accompanis
 accompanist-systemUiController = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 # Amdroid Gradle Plugin
-android-pluginGradle = { module = "com.android.tools.build:gradle", version = "7.3.0-alpha06" }
+android-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version = "1.1.5" }
+android-pluginGradle = { module = "com.android.tools.build:gradle", version = "7.3.0-alpha07" }
 
 # AndroidX Compose libraries
-androidx-compose-activity = { module = "androidx.activity:activity-compose", version = "1.5.0-alpha03" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.0.0-alpha07" }
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version = "1.5.0-alpha04" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version = "1.0.0-alpha08" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
 androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
@@ -30,7 +31,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compos
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
 # AndroidX Core Libraries
-androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.9.0-alpha01" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.8.0-alpha06" }
 
 # AndroidX Hilt
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0" }

@@ -43,6 +43,7 @@ android {
     composeOptions.kotlinCompilerExtensionVersion = libs.versions.compose.get()
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -77,6 +78,9 @@ kotlin {
 dependencies {
     // Accompanist Libraries
     implementation(libs.bundles.accompanist)
+
+    // Android Desugaring
+    coreLibraryDesugaring(libs.android.desugarJdkLibs)
 
     // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
