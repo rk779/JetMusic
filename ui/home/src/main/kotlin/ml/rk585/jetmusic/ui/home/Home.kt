@@ -1,8 +1,8 @@
-package ml.rk585.jetmusic.ui.library
+package ml.rk585.jetmusic.ui.home
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,27 +20,29 @@ import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
 
 @Destination
 @Composable
-fun Library() {
-    Library(
-        onClickAdd = { /*TODO*/ }
+fun Home(
+    navigator: HomeNavigator
+) {
+    Home(
+        onClickSettings = navigator::openSettings
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun Library(
-    onClickAdd: () -> Unit
+fun Home(
+    onClickSettings: () -> Unit
 ) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            LibraryTopAppBar(
+            HomeTopAppBar(
                 scrollBehavior = scrollBehavior,
-                onClickAdd = onClickAdd
+                onClickSettings = onClickSettings
             )
         }
     ) {
@@ -49,19 +51,19 @@ internal fun Library(
 }
 
 @Composable
-private fun LibraryTopAppBar(
+internal fun HomeTopAppBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    onClickAdd: () -> Unit = { }
+    onClickSettings: () -> Unit
 ) {
     JetMusicTopAppBar(
-        title = { Text(text = stringResource(id = R.string.your_library)) },
+        title = { Text(text = stringResource(id = R.string.app_name)) },
         modifier = modifier,
         actions = {
-            IconButton(onClick = onClickAdd) {
+            IconButton(onClick = onClickSettings) {
                 Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null
+                    imageVector = Icons.Outlined.Settings,
+                    contentDescription = stringResource(id = R.string.settings)
                 )
             }
         },

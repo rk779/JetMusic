@@ -24,8 +24,7 @@ fun SmallTopAppBar(
     contentPadding: PaddingValues = WindowInsets.statusBars.asPaddingValues(),
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
-    appBarStyle: AppBarStyle = AppBarStyle.Medium,
-    colors: TopAppBarColors = TopAppBarDefaults.fromAppBarStyle(appBarStyle),
+    colors: TopAppBarColors = TopAppBarDefaults.smallTopAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
     bottomContent: @Composable ColumnScope.() -> Unit = {}
 ) {

@@ -126,6 +126,7 @@ dependencies {
     implementation(projects.core.media)
     implementation(projects.ui.artist)
     implementation(projects.ui.common)
+    implementation(projects.ui.home)
     implementation(projects.ui.library)
     implementation(projects.ui.player)
     implementation(projects.ui.playlist)

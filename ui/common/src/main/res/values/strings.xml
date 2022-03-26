@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">JetMusic</string>
+
+    <!-- Common -->
+    <string name="navigate_up">Navigate Up</string>
+
     <string name="music_artist_name">Music • %s</string>
+
+    <!-- Home -->
+    <string name="home">Home</string>
+
+    <!-- Library -->
+    <string name="your_library">Your Library</string>
+
+    <!-- Search -->
+    <string name="search">Search</string>
+    <string name="search_placeholder">Artists, songs or playlists</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
 </resources>

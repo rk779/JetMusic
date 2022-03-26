@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ml.rk585.jetmusic.ui.settings"
+    namespace = "ml.rk585.jetmusic.ui.home"
     compileSdk = 32
     defaultConfig.minSdk = 21
 
@@ -18,7 +18,7 @@ android {
     }
 
     ksp {
-        arg("compose-destinations.moduleName", "settings")
+        arg("compose-destinations.moduleName", "home")
         arg("compose-destinations.mode", "destinations")
     }
 }

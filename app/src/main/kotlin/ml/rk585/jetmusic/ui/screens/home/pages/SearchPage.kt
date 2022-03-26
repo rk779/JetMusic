@@ -45,7 +45,7 @@ import ml.rk585.jetmusic.R
 import ml.rk585.jetmusic.data.model.SearchQuery
 import ml.rk585.jetmusic.data.model.SearchType
 import ml.rk585.jetmusic.ui.common.components.JetImage
-import ml.rk585.jetmusic.ui.common.components.SearchField
+import ml.rk585.jetmusic.ui.common.components.SearchTextField
 import ml.rk585.jetmusic.ui.common.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.common.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.common.theme.textFieldColors
@@ -112,7 +112,7 @@ private fun SearchTopAppBar(
         scrollBehavior = scrollBehavior,
         modifier = Modifier.fillMaxWidth()
     ) {
-        SearchField(
+        SearchTextField(
             value = query,
             onValueChange = {
                 query = it

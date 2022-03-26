@@ -25,7 +25,7 @@ fun JetMusicTopAppBar(
     contentPadding: PaddingValues = WindowInsets.statusBars.asPaddingValues(),
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
-    appBarStyle: AppBarStyle = AppBarStyle.Medium,
+    appBarStyle: AppBarStyle = AppBarStyle.Small,
     colors: TopAppBarColors = TopAppBarDefaults.fromAppBarStyle(appBarStyle),
     scrollBehavior: TopAppBarScrollBehavior? = null
 ) {

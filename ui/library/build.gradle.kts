@@ -42,4 +42,7 @@ dependencies {
     // Navigation
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
+
+    // Projects
+    implementation(projects.ui.common)
 }
