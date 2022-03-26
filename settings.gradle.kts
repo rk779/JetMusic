@@ -24,5 +24,6 @@ include(":ui:library")
 include(":ui:player")
 include(":ui:playlist")
 include(":ui:search")
+include(":ui:settings")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

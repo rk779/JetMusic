@@ -130,4 +130,5 @@ dependencies {
     implementation(projects.ui.player)
     implementation(projects.ui.playlist)
     implementation(projects.ui.search)
+    implementation(projects.ui.settings)
 }
