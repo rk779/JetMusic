@@ -30,7 +30,7 @@ import androidx.palette.graphics.Palette
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ml.rk585.jetmusic.ui.theme.contrastComposite
+import ml.rk585.jetmusic.ui.common.theme.contrastComposite
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.min

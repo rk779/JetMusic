@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.ui.theme
+package ml.rk585.jetmusic.ui.common.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

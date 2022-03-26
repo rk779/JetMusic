@@ -106,7 +106,7 @@ dependencies {
     kapt(libs.dagger.hilt.compiler)
 
     // Kotlinx libraries
-    implementation(libs.bundles.kotlinx)
+    implementation(libs.bundles.kotlinx.coroutines)
 
     // NewPipe Extractor
     implementation(libs.newpipe.extractor)
@@ -118,4 +118,16 @@ dependencies {
     implementation(libs.logcat.lib)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    // Projects
+    implementation(projects.core.base)
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.core.media)
+    implementation(projects.ui.artist)
+    implementation(projects.ui.common)
+    implementation(projects.ui.library)
+    implementation(projects.ui.player)
+    implementation(projects.ui.playlist)
+    implementation(projects.ui.search)
 }

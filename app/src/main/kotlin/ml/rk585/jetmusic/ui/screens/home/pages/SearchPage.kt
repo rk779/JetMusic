@@ -48,7 +48,7 @@ import ml.rk585.jetmusic.ui.components.JetImage
 import ml.rk585.jetmusic.ui.components.SearchField
 import ml.rk585.jetmusic.ui.components.SelectableChipRow
 import ml.rk585.jetmusic.ui.components.SmallTopAppBar
-import ml.rk585.jetmusic.ui.theme.textFieldColors
+import ml.rk585.jetmusic.ui.common.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem

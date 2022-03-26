@@ -10,7 +10,7 @@ import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import ml.rk585.jetmusic.ui.components.ModalBottomSheetLayout
 import ml.rk585.jetmusic.ui.components.rememberBottomSheetNavigator
 import ml.rk585.jetmusic.ui.screens.NavGraphs
-import ml.rk585.jetmusic.ui.theme.JetMusicTheme
+import ml.rk585.jetmusic.ui.common.theme.JetMusicTheme
 
 @OptIn(
     ExperimentalAnimationApi::class,
