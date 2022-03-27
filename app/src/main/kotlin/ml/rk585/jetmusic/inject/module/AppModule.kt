@@ -10,9 +10,12 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import ml.rk585.jetmusic.core.base.util.CoroutineDispatchers
 import ml.rk585.jetmusic.core.base.util.Downloader
+import ml.rk585.jetmusic.core.base.util.ExtractorHelper
 import ml.rk585.jetmusic.data.service.PlayerConnection
 import ml.rk585.jetmusic.data.service.PlayerConnectionImpl
 import okhttp3.OkHttpClient
+import org.schabi.newpipe.extractor.ServiceList
+import org.schabi.newpipe.extractor.services.youtube.YoutubeService
 import javax.inject.Singleton
 
 @Module
@@ -42,6 +45,18 @@ object AppModule {
         )
     }
 
+    @Singleton
+    @Provides
+    fun provideExtractorHelper(
+        dispatchers: CoroutineDispatchers,
+        youtubeService: YoutubeService
+    ): ExtractorHelper {
+        return ExtractorHelper(
+            dispatchers = dispatchers,
+            youtubeService = youtubeService
+        )
+    }
+
     @Provides
     fun providePlayerConnection(
         @ApplicationContext context: Context
@@ -49,5 +64,11 @@ object AppModule {
         return PlayerConnectionImpl(
             context = context
         )
+    }
+
+    @Singleton
+    @Provides
+    fun provideYoutubeService(): YoutubeService {
+        return ServiceList.YouTube
     }
 }

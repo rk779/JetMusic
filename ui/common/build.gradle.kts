@@ -20,6 +20,7 @@ android {
 dependencies {
     // Accompanist Libraries
     implementation(libs.accompanist.navigation.material)
+    implementation(libs.accompanist.pager.indicators)
     implementation(libs.accompanist.placeholder.material)
     implementation(libs.accompanist.systemUiController)
 

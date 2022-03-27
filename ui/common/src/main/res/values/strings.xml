@@ -2,8 +2,12 @@
 <resources>
     <string name="app_name">JetMusic</string>
 
+    <!-- Artist -->
+    <string name="artist">Artist</string>
+
     <!-- Common -->
     <string name="navigate_up">Navigate Up</string>
+    <string name="unknown">Unknown</string>
 
     <string name="music_artist_name">Music • %s</string>
 

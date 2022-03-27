@@ -22,6 +22,10 @@ kapt {
 }
 
 dependencies {
+    // AndroidX Paging
+    implementation(libs.androidx.paging.common)
+    implementation(libs.androidx.paging.runtime)
+
     // Dependency Injection
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)

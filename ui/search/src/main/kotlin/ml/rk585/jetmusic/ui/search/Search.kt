@@ -1,13 +1,18 @@
 package ml.rk585.jetmusic.ui.search
 
-import androidx.compose.animation.rememberSplineBasedDecay
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -15,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -24,29 +30,64 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
+import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.ui.common.R
+import ml.rk585.jetmusic.ui.common.components.MediaListItem
 import ml.rk585.jetmusic.ui.common.components.SearchTextField
 import ml.rk585.jetmusic.ui.common.components.SmallTopAppBar
+import ml.rk585.jetmusic.ui.common.components.pagerTabIndicatorOffset
 import ml.rk585.jetmusic.ui.common.theme.textFieldColors
+import org.schabi.newpipe.extractor.InfoItem
 
 @Destination
 @Composable
 fun Search() {
     Search(
-        onUpdateQuery = { }
+        viewModel = hiltViewModel()
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun Search(
+    viewModel: SearchViewModel
+) {
+    val albumPagingItems = viewModel.albumsPagerFlow.collectAsLazyPagingItems()
+    val artistPagingItems = viewModel.artistsPagerFlow.collectAsLazyPagingItems()
+    val playlistPagingItems = viewModel.playlistsPagerFlow.collectAsLazyPagingItems()
+    val songPagingItems = viewModel.songsPagerFlow.collectAsLazyPagingItems()
+
+    Search(
+        albumPagingItems = albumPagingItems,
+        artistPagingItems = artistPagingItems,
+        playlistPagingItems = playlistPagingItems,
+        songPagingItems = songPagingItems,
+        onUpdateQuery = viewModel::updateQuery
+    )
+}
+
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalPagerApi::class
+)
+@Composable
+internal fun Search(
+    albumPagingItems: LazyPagingItems<InfoItem>,
+    artistPagingItems: LazyPagingItems<InfoItem>,
+    playlistPagingItems: LazyPagingItems<InfoItem>,
+    songPagingItems: LazyPagingItems<InfoItem>,
     onUpdateQuery: (String) -> Unit
 ) {
-    val decayAnimationSpec = rememberSplineBasedDecay<Float>()
-    val scrollBehavior = remember(decayAnimationSpec) {
-        TopAppBarDefaults.exitUntilCollapsedScrollBehavior(decayAnimationSpec)
-    }
+    val pagerState = rememberPagerState()
+    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
 
     Scaffold(
         modifier = Modifier
@@ -54,24 +95,43 @@ internal fun Search(
             .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             SearchTopAppBar(
-                scrollBehavior = scrollBehavior,
+                pagerState = pagerState,
                 modifier = Modifier.fillMaxWidth(),
+                scrollBehavior = scrollBehavior,
                 onUpdateQuery = onUpdateQuery
             )
         }
-    ) {
-
+    ) { paddingValues ->
+        HorizontalPager(
+            count = PAGES.size,
+            state = pagerState,
+            contentPadding = paddingValues
+        ) { page ->
+            Crossfade(targetState = page) { state ->
+                when (state) {
+                    0 -> ListPage(songPagingItems)
+                    1 -> ListPage(albumPagingItems)
+                    2 -> ListPage(artistPagingItems)
+                    3 -> ListPage(playlistPagingItems)
+                }
+            }
+        }
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(
+    ExperimentalComposeUiApi::class,
+    ExperimentalPagerApi::class
+)
 @Composable
 internal fun SearchTopAppBar(
+    pagerState: PagerState,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     onUpdateQuery: (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
+    val scope = rememberCoroutineScope()
     var searchQuery by rememberSaveable(stateSaver = TextFieldValue.Saver) {
         mutableStateOf(TextFieldValue())
     }
@@ -87,7 +147,8 @@ internal fun SearchTopAppBar(
                 searchQuery = value
                 onUpdateQuery(value.text)
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             placeholder = stringResource(id = R.string.search_placeholder),
             keyboardActions = KeyboardActions(
@@ -96,5 +157,54 @@ internal fun SearchTopAppBar(
             shape = RoundedCornerShape(24.dp),
             colors = textFieldColors()
         )
+
+        TabRow(
+            selectedTabIndex = pagerState.currentPage,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    modifier = Modifier.pagerTabIndicatorOffset(
+                        pagerState = pagerState,
+                        tabPositions = tabPositions
+                    )
+                )
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            PAGES.forEachIndexed { index, title ->
+                Tab(
+                    text = { Text(text = title) },
+                    selected = pagerState.currentPage == index,
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                    unselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
     }
 }
+
+@Composable
+internal fun <T : InfoItem> ListPage(
+    pagingItems: LazyPagingItems<T>
+) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        items(pagingItems) { item ->
+            if (item != null) {
+                MediaListItem(
+                    item = item,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClickArtist = { },
+                    onClickPlaylist = { },
+                    onClickSong = { }
+                )
+            }
+        }
+    }
+}
+
+private val PAGES = listOf("Songs", "Albums", "Artists", "Playlists")

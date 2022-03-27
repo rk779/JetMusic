@@ -17,6 +17,7 @@ android {
 dependencies {
     // AndroidX
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.paging.common)
 
     // Kotlin Coroutines
     api(libs.bundles.kotlinx.coroutines)
@@ -26,4 +27,5 @@ dependencies {
 
     // Network
     api(libs.okHttp3.okHttp)
+    api(libs.store.lib)
 }

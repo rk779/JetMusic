@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
+    id("com.google.dagger.hilt.android")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -14,6 +16,20 @@ android {
     }
 }
 
-dependencies {
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
 
+dependencies {
+    // AndroidX libraries
+    implementation(libs.androidx.paging.common)
+
+    // Dependency Injection
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+    // Projects
+    implementation(projects.core.base)
+    implementation(projects.core.data)
 }
