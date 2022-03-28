@@ -1,7 +1,9 @@
 plugins {
     id("com.android.library")
+    id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -23,6 +25,11 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
 kotlin {
     sourceSets {
         debug {
@@ -36,10 +43,23 @@ kotlin {
 
 dependencies {
     // AndroidX Libraries
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewModel.ktx)
+    implementation(libs.androidx.paging.compose)
     implementation(libs.bundles.androidx.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Navigation
     implementation(libs.compose.destinations.core)
     ksp(libs.compose.destinations.ksp)
+
+    // Dependency Injection
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.dagger.hilt.compiler)
+
+    // Projects
+    implementation(projects.core.base)
+    implementation(projects.core.data)
+    implementation(projects.core.domain)
+    implementation(projects.ui.common)
 }

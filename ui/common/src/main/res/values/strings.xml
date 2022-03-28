@@ -7,6 +7,7 @@
 
     <!-- Common -->
     <string name="navigate_up">Navigate Up</string>
+    <string name="play">Play</string>
     <string name="unknown">Unknown</string>
 
     <string name="music_artist_name">Music • %s</string>

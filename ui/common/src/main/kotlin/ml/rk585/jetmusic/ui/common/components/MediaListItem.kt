@@ -2,10 +2,8 @@ package ml.rk585.jetmusic.ui.common.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ListItem
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -59,7 +57,7 @@ fun MediaListItem(
                     else -> stringResource(id = R.string.unknown)
                 },
                 style = MaterialTheme.typography.bodyMedium,
-                color = LocalContentColor.current.copy(ContentAlpha.medium),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -69,8 +67,8 @@ fun MediaListItem(
             Text(
                 text = item.name,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge
+                maxLines = 2,
+                style = MaterialTheme.typography.titleMedium
             )
         }
     )

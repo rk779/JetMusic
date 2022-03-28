@@ -27,6 +27,7 @@ dependencies {
     // AndroidX Libraries
     implementation(libs.androidx.media.common)
     implementation(libs.androidx.media.session)
+    implementation(libs.androidx.palette.ktx)
     implementation(libs.bundles.androidx.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
 

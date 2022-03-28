@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.util
+package ml.rk585.jetmusic.core.base.extensions
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,6 +8,7 @@ import coil.request.ErrorResult
 import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.size.Precision
+import coil.size.Scale
 import logcat.asLog
 import logcat.logcat
 
@@ -19,6 +20,7 @@ suspend fun Context.getBitmap(
     val request = ImageRequest.Builder(this)
         .data(data)
         .size(size)
+        .scale(Scale.FILL)
         .precision(Precision.INEXACT)
         .allowHardware(allowHardware)
         .build()
@@ -31,4 +33,3 @@ suspend fun Context.getBitmap(
         }
     }
 }
-

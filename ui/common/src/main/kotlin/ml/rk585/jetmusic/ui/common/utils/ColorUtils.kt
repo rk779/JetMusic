@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.util
+package ml.rk585.jetmusic.ui.common.utils
 
 import android.graphics.Bitmap
 import androidx.annotation.ColorInt
@@ -7,16 +7,17 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
@@ -25,11 +26,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.graphics.ColorUtils
-import androidx.core.math.MathUtils
 import androidx.palette.graphics.Palette
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ml.rk585.jetmusic.core.base.extensions.getBitmap
 import ml.rk585.jetmusic.ui.common.theme.contrastComposite
 import kotlin.math.PI
 import kotlin.math.cos
@@ -38,24 +39,23 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 import android.graphics.Color as AColor
-import androidx.compose.material3.MaterialTheme as MaterialTheme3
 
 val ADAPTIVE_COLOR_ANIMATION: AnimationSpec<Color> = tween(easing = FastOutSlowInEasing)
 
 data class AdaptiveColorResult(val color: Color, val contentColor: Color, val gradient: Brush)
 
 val LocalAdaptiveColorResult =
-    staticCompositionLocalOf<AdaptiveColorResult> { error("AdaptiveColorResult  not provided") }
+    compositionLocalOf<AdaptiveColorResult> { error("AdaptiveColorResult  not provided") }
 
 private val adaptiveColorCache = mutableMapOf<String, Color>()
 
 @Composable
 fun adaptiveColor(
     imageData: Any?,
-    fallback: Color = MaterialTheme3.colorScheme.onBackground.contrastComposite(),
+    fallback: Color = MaterialTheme.colorScheme.secondary.contrastComposite(),
     initial: Color = fallback,
     animationSpec: AnimationSpec<Color> = ADAPTIVE_COLOR_ANIMATION,
-    gradientEndColor: Color = if (MaterialTheme.colors.isLight) Color.White else Color.Black,
+    gradientEndColor: Color = if (isSystemInDarkTheme()) Color.White else Color.Black,
 ): State<AdaptiveColorResult> {
     val context = LocalContext.current
     var bitmap by remember { mutableStateOf<Bitmap?>(null) }
@@ -85,11 +85,11 @@ fun adaptiveColor(
 fun adaptiveColor(
     image: Bitmap? = null,
     imageSource: Any? = image,
-    fallback: Color = MaterialTheme3.colorScheme.onBackground.contrastComposite(),
+    fallback: Color = MaterialTheme.colorScheme.secondary.contrastComposite(),
     initial: Color = fallback,
     animationSpec: AnimationSpec<Color> = ADAPTIVE_COLOR_ANIMATION,
-    gradientEndColor: Color = if (MaterialTheme.colors.isLight) Color.White else Color.Black,
-    isDarkColors: Boolean = !MaterialTheme.colors.isLight
+    gradientEndColor: Color = if (isSystemInDarkTheme()) Color.White else Color.Black,
+    isDarkColors: Boolean = !isSystemInDarkTheme()
 ): State<AdaptiveColorResult> {
     val imageHash = imageSource.hashCode().toString()
     val initialAccent = adaptiveColorCache.getOrElse(imageHash) { initial }
@@ -213,31 +213,7 @@ private fun getContrastColor(@ColorInt color: Int): Int {
     return if (a < 0.5) AColor.BLACK else AColor.WHITE
 }
 
-private fun desaturate(isDarkMode: Boolean, color: Int): Int {
-    if (!isDarkMode) {
-        return color
-    }
-
-    if (color == AColor.TRANSPARENT) {
-        // can't desaturate transparent color
-        return color
-    }
-    val amount = .25f
-    val minDesaturation = .75f
-
-    val hsl = floatArrayOf(0f, 0f, 0f)
-    ColorUtils.colorToHSL(color, hsl)
-    if (hsl[1] > minDesaturation) {
-        hsl[1] = MathUtils.clamp(
-            hsl[1] - amount,
-            minDesaturation - 0.1f,
-            1f
-        )
-    }
-    return ColorUtils.HSLToColor(hsl)
-}
-
-fun shiftColor(@ColorInt color: Int, @FloatRange(from = 0.0, to = 2.0) by: Float): Int {
+private fun shiftColor(@ColorInt color: Int, @FloatRange(from = 0.0, to = 2.0) by: Float): Int {
     return if (by == 1.0f) {
         color
     } else {

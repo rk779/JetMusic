@@ -50,7 +50,7 @@ import ml.rk585.jetmusic.ui.common.components.JetImage
 import ml.rk585.jetmusic.ui.common.components.rememberCurrentMediaItem
 import ml.rk585.jetmusic.ui.common.components.rememberMediaSessionPlayer
 import ml.rk585.jetmusic.ui.common.components.rememberPlayProgress
-import ml.rk585.jetmusic.util.adaptiveColor
+import ml.rk585.jetmusic.ui.common.utils.adaptiveColor
 import ml.rk585.jetmusic.util.playPause
 
 @Composable

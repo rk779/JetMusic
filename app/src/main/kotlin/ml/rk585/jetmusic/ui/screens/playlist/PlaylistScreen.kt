@@ -51,13 +51,13 @@ import ml.rk585.jetmusic.R
 import ml.rk585.jetmusic.data.model.StreamsCountDuration
 import ml.rk585.jetmusic.ui.common.components.AppBarStyle
 import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
+import ml.rk585.jetmusic.ui.common.components.MusicListItem
 import ml.rk585.jetmusic.ui.common.components.PlayPauseButton
 import ml.rk585.jetmusic.ui.common.components.ScaledCoverImage
 import ml.rk585.jetmusic.ui.common.components.rememberFlowWithLifecycle
 import ml.rk585.jetmusic.ui.common.components.scaledCoverImageScrollProgress
-import ml.rk585.jetmusic.ui.common.components.MusicListItem
-import ml.rk585.jetmusic.util.LocalAdaptiveColorResult
-import ml.rk585.jetmusic.util.adaptiveColor
+import ml.rk585.jetmusic.ui.common.utils.LocalAdaptiveColorResult
+import ml.rk585.jetmusic.ui.common.utils.adaptiveColor
 import kotlin.time.Duration.Companion.seconds
 
 @Destination(navArgsDelegate = PlaylistScreenNavArgs::class)

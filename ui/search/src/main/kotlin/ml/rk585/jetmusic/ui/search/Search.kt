@@ -47,17 +47,22 @@ import ml.rk585.jetmusic.ui.common.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.common.components.pagerTabIndicatorOffset
 import ml.rk585.jetmusic.ui.common.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
+import org.schabi.newpipe.extractor.ServiceList
 
 @Destination
 @Composable
-fun Search() {
+fun Search(
+    navigator: SearchNavigator
+) {
     Search(
+        navigator = navigator,
         viewModel = hiltViewModel()
     )
 }
 
 @Composable
 internal fun Search(
+    navigator: SearchNavigator,
     viewModel: SearchViewModel
 ) {
     val albumPagingItems = viewModel.albumsPagerFlow.collectAsLazyPagingItems()
@@ -70,6 +75,7 @@ internal fun Search(
         artistPagingItems = artistPagingItems,
         playlistPagingItems = playlistPagingItems,
         songPagingItems = songPagingItems,
+        onClickPlaylist = navigator::openPlaylist,
         onUpdateQuery = viewModel::updateQuery
     )
 }
@@ -84,6 +90,7 @@ internal fun Search(
     artistPagingItems: LazyPagingItems<InfoItem>,
     playlistPagingItems: LazyPagingItems<InfoItem>,
     songPagingItems: LazyPagingItems<InfoItem>,
+    onClickPlaylist: (String) -> Unit,
     onUpdateQuery: (String) -> Unit
 ) {
     val pagerState = rememberPagerState()
@@ -109,10 +116,10 @@ internal fun Search(
         ) { page ->
             Crossfade(targetState = page) { state ->
                 when (state) {
-                    0 -> ListPage(songPagingItems)
-                    1 -> ListPage(albumPagingItems)
-                    2 -> ListPage(artistPagingItems)
-                    3 -> ListPage(playlistPagingItems)
+                    0 -> ListPage(songPagingItems, onClickPlaylist)
+                    1 -> ListPage(albumPagingItems, onClickPlaylist)
+                    2 -> ListPage(artistPagingItems, onClickPlaylist)
+                    3 -> ListPage(playlistPagingItems, onClickPlaylist)
                 }
             }
         }
@@ -188,7 +195,8 @@ internal fun SearchTopAppBar(
 
 @Composable
 internal fun <T : InfoItem> ListPage(
-    pagingItems: LazyPagingItems<T>
+    pagingItems: LazyPagingItems<T>,
+    onClickPlaylist: (String) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -199,7 +207,10 @@ internal fun <T : InfoItem> ListPage(
                     item = item,
                     modifier = Modifier.fillMaxWidth(),
                     onClickArtist = { },
-                    onClickPlaylist = { },
+                    onClickPlaylist = { playlistInfoItem ->
+                        val id = ServiceList.YouTube.playlistLHFactory.getId(playlistInfoItem.url)
+                        onClickPlaylist(id)
+                    },
                     onClickSong = { }
                 )
             }

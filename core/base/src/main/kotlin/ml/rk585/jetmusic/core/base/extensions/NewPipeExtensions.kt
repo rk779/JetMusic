@@ -6,7 +6,7 @@ import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage
 import org.schabi.newpipe.extractor.ListInfo
 import org.schabi.newpipe.extractor.Page
 
-fun <T : InfoItem> ListInfo<T>.toPage(): PagingSource.LoadResult.Page<Page, InfoItem> {
+fun <T : InfoItem> ListInfo<T>.toPage(): PagingSource.LoadResult.Page<Page, T> {
     return PagingSource.LoadResult.Page(
         data = relatedItems,
         nextKey = nextPage,
@@ -14,7 +14,7 @@ fun <T : InfoItem> ListInfo<T>.toPage(): PagingSource.LoadResult.Page<Page, Info
     )
 }
 
-fun <T : InfoItem> InfoItemsPage<T>.toPage(): PagingSource.LoadResult.Page<Page, InfoItem> {
+fun <T : InfoItem> InfoItemsPage<T>.toPage(): PagingSource.LoadResult.Page<Page, T> {
     return PagingSource.LoadResult.Page(
         data = items,
         nextKey = nextPage,

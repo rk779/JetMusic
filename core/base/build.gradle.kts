@@ -19,11 +19,17 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.paging.common)
 
+    // Image Loading
+    implementation(libs.coil)
+
     // Kotlin Coroutines
     api(libs.bundles.kotlinx.coroutines)
 
     // Youtube Provider
     api(libs.newpipe.extractor)
+
+    // Logcat
+    api(libs.logcat.lib)
 
     // Network
     api(libs.okHttp3.okHttp)
