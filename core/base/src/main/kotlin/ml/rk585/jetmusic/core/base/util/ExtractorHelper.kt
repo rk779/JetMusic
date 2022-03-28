@@ -1,7 +1,6 @@
 package ml.rk585.jetmusic.core.base.util
 
 import kotlinx.coroutines.withContext
-import ml.rk585.jetmusic.core.base.extensions.tryOrNull
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.ListExtractor.InfoItemsPage
 import org.schabi.newpipe.extractor.Page
@@ -16,18 +15,6 @@ class ExtractorHelper(
     private val dispatchers: CoroutineDispatchers,
     private val youtubeService: YoutubeService
 ) {
-    fun extractChannelID(url: String): String? {
-        return tryOrNull { youtubeService.channelLHFactory.getId(url) }
-    }
-
-    fun extractPlaylistID(url: String): String? {
-        return tryOrNull { youtubeService.playlistLHFactory.getId(url) }
-    }
-
-    fun extractStreamID(url: String): String? {
-        return tryOrNull { youtubeService.streamLHFactory.getId(url) }
-    }
-
     suspend fun search(
         query: String,
         contentFilter: List<String> = emptyList(),

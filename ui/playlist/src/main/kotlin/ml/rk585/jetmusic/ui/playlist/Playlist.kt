@@ -136,7 +136,7 @@ internal fun PlaylistContent(
     ) {
         item {
             ScaledCoverImage(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillParentMaxWidth(),
                 imageData = playlistInfo.thumbnailUrl,
                 icon = rememberVectorPainter(Icons.Default.Album),
                 offsetProgress = coverOffsetProgress
@@ -149,7 +149,7 @@ internal fun PlaylistContent(
             PlaylistInfoDetailsHeader(
                 playlistInfo = playlistInfo,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillParentMaxWidth()
                     .padding(horizontal = 16.dp)
             )
         }
@@ -157,9 +157,7 @@ internal fun PlaylistContent(
             if (item != null) {
                 MediaListItem(
                     item = item,
-                    onClickArtist = {},
-                    onClickPlaylist = {},
-                    onClickSong = {}
+                    modifier = Modifier.fillParentMaxWidth()
                 )
             }
         }

@@ -47,7 +47,6 @@ import ml.rk585.jetmusic.ui.common.components.SmallTopAppBar
 import ml.rk585.jetmusic.ui.common.components.pagerTabIndicatorOffset
 import ml.rk585.jetmusic.ui.common.theme.textFieldColors
 import org.schabi.newpipe.extractor.InfoItem
-import org.schabi.newpipe.extractor.ServiceList
 
 @Destination
 @Composable
@@ -206,12 +205,7 @@ internal fun <T : InfoItem> ListPage(
                 MediaListItem(
                     item = item,
                     modifier = Modifier.fillMaxWidth(),
-                    onClickArtist = { },
-                    onClickPlaylist = { playlistInfoItem ->
-                        val id = ServiceList.YouTube.playlistLHFactory.getId(playlistInfoItem.url)
-                        onClickPlaylist(id)
-                    },
-                    onClickSong = { }
+                    onClickPlaylist = onClickPlaylist,
                 )
             }
         }
