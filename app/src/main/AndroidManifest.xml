@@ -30,7 +30,7 @@
         </activity>
 
         <service
-            android:name="ml.rk585.jetmusic.data.service.MusicService"
+            android:name="ml.rk585.jetmusic.core.media.MusicService"
             android:exported="false">
             <intent-filter>
                 <action android:name="androidx.media3.session.MediaLibraryService" />

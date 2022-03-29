@@ -1,5 +1,6 @@
 package ml.rk585.jetmusic.inject.module
 
+import android.content.ComponentName
 import android.content.Context
 import dagger.Lazy
 import dagger.Module
@@ -11,6 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import ml.rk585.jetmusic.core.base.util.CoroutineDispatchers
 import ml.rk585.jetmusic.core.base.util.Downloader
 import ml.rk585.jetmusic.core.base.util.ExtractorHelper
+import ml.rk585.jetmusic.core.media.MusicPlayer
+import ml.rk585.jetmusic.core.media.MusicPlayerImpl
+import ml.rk585.jetmusic.core.media.MusicService
 import ml.rk585.jetmusic.data.service.PlayerConnection
 import ml.rk585.jetmusic.data.service.PlayerConnectionImpl
 import okhttp3.OkHttpClient
@@ -54,6 +58,17 @@ object AppModule {
         return ExtractorHelper(
             dispatchers = dispatchers,
             youtubeService = youtubeService
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideMusicPlayer(
+        @ApplicationContext context: Context
+    ): MusicPlayer {
+        return MusicPlayerImpl(
+            context = context,
+            serviceComponent = ComponentName(context, MusicService::class.java)
         )
     }
 

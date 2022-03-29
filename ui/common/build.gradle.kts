@@ -36,4 +36,5 @@ dependencies {
 
     // Projects
     implementation(projects.core.base)
+    implementation(projects.core.media)
 }

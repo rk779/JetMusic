@@ -2,6 +2,7 @@ package ml.rk585.jetmusic.ui
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,6 +34,7 @@ import ml.rk585.jetmusic.ui.common.components.JetMusicBottomNavigationBar
 import ml.rk585.jetmusic.ui.common.components.ModalBottomSheetLayout
 import ml.rk585.jetmusic.ui.common.components.rememberBottomSheetNavigator
 import ml.rk585.jetmusic.ui.common.theme.JetMusicTheme
+import ml.rk585.jetmusic.ui.player.miniPlayer.MiniPlayer
 
 @OptIn(
     ExperimentalAnimationApi::class,
@@ -77,11 +79,17 @@ internal fun JetMusic(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            BottomNavigationBar(
-                selectedNavGraphSpec = currentNavGraphSpec,
-                onNavGraphSpecSelected = navigateToNavGraphSpec,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Column {
+                MiniPlayer(
+                    openPlayerSheet = { navController.navigateTo(NavGraphs.player) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+                BottomNavigationBar(
+                    selectedNavGraphSpec = currentNavGraphSpec,
+                    onNavGraphSpecSelected = navigateToNavGraphSpec,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     ) { paddingValues ->
         AppNavigation(

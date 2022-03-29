@@ -26,6 +26,7 @@ import ml.rk585.jetmusic.ui.artist.destinations.ArtistDestination
 import ml.rk585.jetmusic.ui.common.R
 import ml.rk585.jetmusic.ui.home.destinations.HomeDestination
 import ml.rk585.jetmusic.ui.library.destinations.LibraryDestination
+import ml.rk585.jetmusic.ui.player.destinations.PlayerDestination
 import ml.rk585.jetmusic.ui.playlist.destinations.PlaylistDestination
 import ml.rk585.jetmusic.ui.search.destinations.SearchDestination
 import ml.rk585.jetmusic.ui.settings.destinations.SettingsDestination
@@ -52,6 +53,15 @@ internal object NavGraphs {
             .associateBy { it.route }
     }
 
+    val player = object : NavGraphSpec {
+        override val route: String = "player"
+        override val startRoute: Route = PlayerDestination routedIn this
+        override val destinationsByRoute = listOf<DestinationSpec<*>>(
+            PlayerDestination
+        ).routedIn(this)
+            .associateBy { it.route }
+    }
+
     val search = object : NavGraphSpec {
         override val route: String = "search"
         override val startRoute: Route = SearchDestination routedIn this
@@ -70,7 +80,8 @@ internal object NavGraphs {
         override val nestedNavGraphs = listOf(
             home,
             search,
-            library
+            library,
+            player
         )
     }
 }

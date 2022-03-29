@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ml.rk585.jetmusic.core.base.extensions.toCompactView
 import ml.rk585.jetmusic.core.base.util.Extractor
+import ml.rk585.jetmusic.ui.common.LocalMusicPlayer
 import ml.rk585.jetmusic.ui.common.R
 import org.schabi.newpipe.extractor.InfoItem
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
@@ -32,9 +33,10 @@ fun MediaListItem(
     item: InfoItem,
     modifier: Modifier = Modifier,
     onClickArtist: ((String) -> Unit)? = null,
-    onClickPlaylist: ((String) -> Unit)? = null,
-    onClickSong: ((String) -> Unit)? = null
+    onClickPlaylist: ((String) -> Unit)? = null
 ) {
+    val musicPlayer = LocalMusicPlayer.current
+
     Row(
         modifier = modifier
             .clickable {
@@ -53,13 +55,7 @@ fun MediaListItem(
                                 onClickPlaylist?.invoke(playlistId)
                             }
                     }
-                    InfoItem.InfoType.STREAM -> {
-                        Extractor
-                            .extractStreamId((item as StreamInfoItem).url)
-                            ?.let { streamId ->
-                                onClickSong?.invoke(streamId)
-                            }
-                    }
+                    InfoItem.InfoType.STREAM -> musicPlayer.play(item as StreamInfoItem)
                     else -> Unit
                 }
             }

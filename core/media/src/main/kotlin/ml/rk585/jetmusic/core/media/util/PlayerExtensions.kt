@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.util
+package ml.rk585.jetmusic.core.media.util
 
 import androidx.media3.common.Player
 import logcat.logcat

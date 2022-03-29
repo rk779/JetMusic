@@ -7,6 +7,7 @@ import com.ramcosta.composedestinations.spec.NavGraphSpec
 import ml.rk585.jetmusic.ui.artist.ArtistNavigator
 import ml.rk585.jetmusic.ui.artist.destinations.ArtistDestination
 import ml.rk585.jetmusic.ui.home.HomeNavigator
+import ml.rk585.jetmusic.ui.player.PlayerNavigator
 import ml.rk585.jetmusic.ui.playlist.PlaylistNavigator
 import ml.rk585.jetmusic.ui.playlist.destinations.PlaylistDestination
 import ml.rk585.jetmusic.ui.search.SearchNavigator
@@ -18,6 +19,7 @@ internal class Navigator(
     private val navGraphSpec: NavGraphSpec
 ) : ArtistNavigator,
     HomeNavigator,
+    PlayerNavigator,
     PlaylistNavigator,
     SearchNavigator,
     SettingsNavigator {

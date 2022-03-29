@@ -1,14 +1,11 @@
-package ml.rk585.jetmusic.ui.screens.player.components
+package ml.rk585.jetmusic.ui.player.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -22,17 +19,10 @@ import androidx.compose.material.icons.filled.ShuffleOn
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -41,80 +31,48 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
-import ml.rk585.jetmusic.core.base.extensions.formatAsPlayerTime
-import ml.rk585.jetmusic.core.media.util.playPause
-import ml.rk585.jetmusic.core.media.util.toggleRepeatMode
-import ml.rk585.jetmusic.core.media.util.toggleShuffleMode
+import ml.rk585.jetmusic.core.media.MusicPlayer
+import ml.rk585.jetmusic.ui.common.LocalMusicPlayer
 import ml.rk585.jetmusic.ui.common.components.IconButton
 import ml.rk585.jetmusic.ui.common.components.JetImage
-import ml.rk585.jetmusic.ui.common.components.rememberCurrentMediaItem
-import ml.rk585.jetmusic.ui.common.components.rememberPlayProgress
-import kotlin.math.roundToLong
+import ml.rk585.jetmusic.ui.common.components.rememberStateWithLifecycle
 
 @Composable
-fun PlaybackArtworkPagerWithNowPlayingAndControls(
+internal fun PlaybackArtworkWithNowPlayingAndControls(
     modifier: Modifier = Modifier,
-    player: Player
+    musicPlayer: MusicPlayer = LocalMusicPlayer.current
 ) {
-    val currentMediaItem = rememberCurrentMediaItem(player)
+    val mediaItem by rememberStateWithLifecycle(musicPlayer.currentMediaItem)
 
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         JetImage(
-            data = currentMediaItem.mediaMetadata.artworkUri,
+            data = mediaItem.mediaMetadata.artworkUri,
             modifier = Modifier.fillMaxWidth(),
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.height(16.dp))
         PlayerNowPlayingInfo(
-            mediaMetadata = currentMediaItem.mediaMetadata,
+            mediaMetadata = mediaItem.mediaMetadata,
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        PlayerProgressSlider(
-            player = player,
+        PlaybackProgress(
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.height(16.dp))
         PlaybackControls(
-            player = player,
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
 
 @Composable
-private fun PlaybackControls(
+internal fun PlaybackControls(
     modifier: Modifier = Modifier,
-    player: Player
+    musicPlayer: MusicPlayer = LocalMusicPlayer.current
 ) {
-    var isMusicPlaying by remember(player) { mutableStateOf(player.isPlaying) }
-    var isShuffleModeEnabled by remember(player) { mutableStateOf(player.shuffleModeEnabled) }
-    var isRepeatModeEnabled by remember(player) { mutableStateOf(player.repeatMode) }
-    val hasNextMediaItem by remember(isRepeatModeEnabled) { mutableStateOf(player.hasNextMediaItem()) }
-    val hasPreviousMediaItem by remember(isRepeatModeEnabled) { mutableStateOf(player.hasPreviousMediaItem()) }
-
-    DisposableEffect(player) {
-        val listener = object : Player.Listener {
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                isMusicPlaying = isPlaying
-            }
-
-            override fun onRepeatModeChanged(repeatMode: Int) {
-                isRepeatModeEnabled = repeatMode
-            }
-
-            override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
-                isShuffleModeEnabled = shuffleModeEnabled
-            }
-        }
-        player.addListener(listener)
-        onDispose {
-            player.removeListener(listener)
-        }
-    }
+    val playerState by rememberStateWithLifecycle(musicPlayer.playerState)
 
     Row(
         modifier = modifier,
@@ -122,14 +80,14 @@ private fun PlaybackControls(
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = { player.toggleShuffleMode() },
+            onClick = musicPlayer::toggleShuffleMode,
             modifier = Modifier
                 .size(20.dp)
                 .weight(2f)
         ) {
             Icon(
                 imageVector = when {
-                    isShuffleModeEnabled -> Icons.Default.ShuffleOn
+                    playerState.shuffleModeEnabled -> Icons.Default.ShuffleOn
                     else -> Icons.Default.Shuffle
                 },
                 contentDescription = null,
@@ -138,8 +96,8 @@ private fun PlaybackControls(
         }
         Spacer(Modifier.width(28.dp))
         IconButton(
-            onClick = { player.seekToPreviousMediaItem() },
-            enabled = hasPreviousMediaItem,
+            onClick = musicPlayer::seekToPrevious,
+            enabled = musicPlayer.hasPreviousMediaItem(),
             modifier = Modifier
                 .size(40.dp)
                 .weight(4f),
@@ -153,14 +111,14 @@ private fun PlaybackControls(
         }
         Spacer(Modifier.width(16.dp))
         IconButton(
-            onClick = { player.playPause() },
+            onClick = musicPlayer::pauseOrResume,
             modifier = Modifier
                 .size(80.dp)
                 .weight(8f),
             rippleRadius = 40.dp
         ) {
             Icon(
-                imageVector = when (isMusicPlaying) {
+                imageVector = when (playerState.isPlaying) {
                     true -> Icons.Filled.PauseCircleFilled
                     false -> Icons.Filled.PlayCircleFilled
                 },
@@ -170,8 +128,8 @@ private fun PlaybackControls(
         }
         Spacer(Modifier.width(16.dp))
         IconButton(
-            onClick = { player.seekToNextMediaItem() },
-            enabled = hasNextMediaItem,
+            onClick = musicPlayer::seekToNext,
+            enabled = musicPlayer.hasNextMediaItem(),
             modifier = Modifier
                 .size(40.dp)
                 .weight(4f),
@@ -185,13 +143,13 @@ private fun PlaybackControls(
         }
         Spacer(Modifier.width(28.dp))
         IconButton(
-            onClick = { player.toggleRepeatMode() },
+            onClick = musicPlayer::toggleRepeatMode,
             modifier = Modifier
                 .size(20.dp)
                 .weight(2f)
         ) {
             Icon(
-                imageVector = when (isRepeatModeEnabled) {
+                imageVector = when (playerState.repeatMode) {
                     Player.REPEAT_MODE_OFF -> Icons.Default.Repeat
                     Player.REPEAT_MODE_ONE -> Icons.Default.RepeatOne
                     Player.REPEAT_MODE_ALL -> Icons.Default.RepeatOn
@@ -205,7 +163,7 @@ private fun PlaybackControls(
 }
 
 @Composable
-private fun PlayerNowPlayingInfo(
+internal fun PlayerNowPlayingInfo(
     mediaMetadata: MediaMetadata,
     modifier: Modifier = Modifier
 ) {
@@ -227,54 +185,5 @@ private fun PlayerNowPlayingInfo(
             maxLines = 1,
             style = MaterialTheme.typography.bodyMedium
         )
-    }
-}
-
-@Composable
-private fun PlayerProgressSlider(
-    player: Player,
-    modifier: Modifier = Modifier
-) {
-    val progress by rememberPlayProgress(player)
-    val percent: Float = progress?.let { (it.first * 100f / it.second) / 100f } ?: 0f
-    val (value, onValueChange) = remember(percent) { mutableStateOf(percent) }
-
-    Box(
-        modifier = modifier,
-    ) {
-        Slider(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            onValueChangeFinished = {
-                player.seekTo(
-                    (value * (progress?.second ?: 0L))
-                        .roundToLong()
-                        .coerceAtLeast(0L)
-                )
-            },
-            colors = SliderDefaults.colors(
-                thumbColor = LocalContentColor.current,
-                activeTrackColor = LocalContentColor.current,
-                inactiveTrackColor = LocalContentColor.current.copy(0.12f)
-            )
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 4.dp)
-                .align(Alignment.BottomCenter),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = progress?.first?.formatAsPlayerTime() ?: "00:00",
-                style = MaterialTheme.typography.labelMedium
-            )
-            Text(
-                text = progress?.second?.formatAsPlayerTime() ?: "00:00",
-                style = MaterialTheme.typography.labelMedium
-            )
-        }
     }
 }

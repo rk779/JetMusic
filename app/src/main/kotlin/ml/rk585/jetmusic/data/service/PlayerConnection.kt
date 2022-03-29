@@ -10,6 +10,7 @@ import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.CoroutineScope
+import ml.rk585.jetmusic.core.media.MusicService
 
 interface PlayerConnection {
     fun play(mediaItem: MediaItem)

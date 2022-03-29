@@ -33,7 +33,7 @@ import ml.rk585.jetmusic.ui.screens.destinations.PlayerSheetDestination
 import ml.rk585.jetmusic.ui.screens.destinations.PlaylistScreenDestination
 import ml.rk585.jetmusic.ui.screens.home.pages.LibraryPage
 import ml.rk585.jetmusic.ui.screens.home.pages.SearchPage
-import ml.rk585.jetmusic.ui.screens.player.MiniPlayerControls
+import ml.rk585.jetmusic.ui.player.miniPlayer.MiniPlayer
 import org.schabi.newpipe.extractor.channel.ChannelInfoItem
 import org.schabi.newpipe.extractor.playlist.PlaylistInfoItem
 
@@ -90,7 +90,7 @@ private fun HomeScreen(
     Scaffold(
         bottomBar = {
             Column {
-                MiniPlayerControls(
+                MiniPlayer(
                     openPlayerSheet = openPlayer,
                     modifier = Modifier.fillMaxWidth()
                 )

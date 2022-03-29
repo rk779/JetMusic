@@ -8,6 +8,29 @@ import kotlin.math.floor
 import kotlin.math.log10
 import kotlin.math.pow
 
+fun timeAddZeros(number: Int?, ifZero: String = ""): String {
+    return when (number) {
+        0 -> ifZero
+        in 1..9 -> "0$number"
+        else -> number.toString()
+    }
+}
+
+fun Long.millisToDuration(): String {
+    val seconds = (this / 1000).toInt() % 60
+    val minutes = (this / (1000 * 60) % 60).toInt()
+    val hours = (this / (1000 * 60 * 60) % 24).toInt()
+    "${timeAddZeros(hours)}:${timeAddZeros(minutes, "0")}:${timeAddZeros(seconds, "00")}".apply {
+        return if (startsWith(":")) replaceFirst(":", "") else this
+    }
+}
+
+fun Long.formatAsPlayerTime(): String {
+    val minutes = String.format("%02d", this / 60_000L)
+    val seconds = String.format("%02d", (this % 60_000L) / 1000L)
+    return "$minutes:$seconds"
+}
+
 fun Number.toCompactView(): String {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         return CompactDecimalFormat.getInstance(

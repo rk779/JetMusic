@@ -14,7 +14,7 @@ class StreamExtractorToMediaItem @Inject constructor() : Mapper<StreamExtractor,
 
     override suspend fun map(from: StreamExtractor): MediaItem {
         val mediaMetadata = MediaMetadata.Builder()
-            .setMediaUri(getBestStreamUri(from))
+            .setMediaUri(from.id.toUri())
             .setTitle(from.name)
             .setArtist(from.uploaderName)
             .setArtworkUri(from.thumbnailUrl.toUri())
@@ -23,7 +23,7 @@ class StreamExtractorToMediaItem @Inject constructor() : Mapper<StreamExtractor,
         return MediaItem.Builder()
             .setMediaId(from.id)
             .setMediaMetadata(mediaMetadata)
-            .setUri(getBestStreamUri(from))
+            .setUri(from.id.toUri())
             .build()
     }
 

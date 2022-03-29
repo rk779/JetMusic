@@ -28,7 +28,7 @@ import androidx.media3.common.Player
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.spec.DestinationStyle
-import ml.rk585.jetmusic.data.service.MusicService
+import ml.rk585.jetmusic.core.media.MusicService
 import ml.rk585.jetmusic.ui.common.components.AppBarStyle
 import ml.rk585.jetmusic.ui.common.components.FullScreenLoading
 import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
