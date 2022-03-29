@@ -63,7 +63,7 @@ internal class SearchViewModel @Inject constructor(
             ObservePagedSearch.Params(
                 SearchDataSource.Params(
                     query,
-                    listOf(YoutubeSearchQueryHandlerFactory.MUSIC_ARTISTS)
+                    listOf(YoutubeSearchQueryHandlerFactory.CHANNELS)
                 )
             )
         )

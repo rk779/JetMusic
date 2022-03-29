@@ -4,6 +4,7 @@
 
     <!-- Artist -->
     <string name="artist">Artist</string>
+    <string name="follow">Follow</string>
 
     <!-- Common -->
     <string name="navigate_up">Navigate Up</string>

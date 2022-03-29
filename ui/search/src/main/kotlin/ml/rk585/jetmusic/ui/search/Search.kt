@@ -74,6 +74,7 @@ internal fun Search(
         artistPagingItems = artistPagingItems,
         playlistPagingItems = playlistPagingItems,
         songPagingItems = songPagingItems,
+        onClickArtist = navigator::openArtist,
         onClickPlaylist = navigator::openPlaylist,
         onUpdateQuery = viewModel::updateQuery
     )
@@ -89,6 +90,7 @@ internal fun Search(
     artistPagingItems: LazyPagingItems<InfoItem>,
     playlistPagingItems: LazyPagingItems<InfoItem>,
     songPagingItems: LazyPagingItems<InfoItem>,
+    onClickArtist: (String) -> Unit,
     onClickPlaylist: (String) -> Unit,
     onUpdateQuery: (String) -> Unit
 ) {
@@ -115,10 +117,10 @@ internal fun Search(
         ) { page ->
             Crossfade(targetState = page) { state ->
                 when (state) {
-                    0 -> ListPage(songPagingItems, onClickPlaylist)
-                    1 -> ListPage(albumPagingItems, onClickPlaylist)
-                    2 -> ListPage(artistPagingItems, onClickPlaylist)
-                    3 -> ListPage(playlistPagingItems, onClickPlaylist)
+                    0 -> ListPage(songPagingItems)
+                    1 -> ListPage(albumPagingItems, onClickPlaylist = onClickPlaylist)
+                    2 -> ListPage(artistPagingItems, onClickArtist = onClickArtist)
+                    3 -> ListPage(playlistPagingItems, onClickPlaylist = onClickPlaylist)
                 }
             }
         }
@@ -195,7 +197,8 @@ internal fun SearchTopAppBar(
 @Composable
 internal fun <T : InfoItem> ListPage(
     pagingItems: LazyPagingItems<T>,
-    onClickPlaylist: (String) -> Unit
+    onClickArtist: ((String) -> Unit)? = null,
+    onClickPlaylist: ((String) -> Unit)? = null
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()
@@ -205,6 +208,7 @@ internal fun <T : InfoItem> ListPage(
                 MediaListItem(
                     item = item,
                     modifier = Modifier.fillMaxWidth(),
+                    onClickArtist = onClickArtist,
                     onClickPlaylist = onClickPlaylist,
                 )
             }

@@ -22,6 +22,7 @@ import com.ramcosta.composedestinations.navigation.dependency
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import com.ramcosta.composedestinations.spec.Route
+import ml.rk585.jetmusic.ui.artist.destinations.ArtistDestination
 import ml.rk585.jetmusic.ui.common.R
 import ml.rk585.jetmusic.ui.home.destinations.HomeDestination
 import ml.rk585.jetmusic.ui.library.destinations.LibraryDestination
@@ -56,6 +57,7 @@ internal object NavGraphs {
         override val startRoute: Route = SearchDestination routedIn this
         override val destinationsByRoute = listOf<DestinationSpec<*>>(
             SearchDestination,
+            ArtistDestination,
             PlaylistDestination
         ).routedIn(this)
             .associateBy { it.route }

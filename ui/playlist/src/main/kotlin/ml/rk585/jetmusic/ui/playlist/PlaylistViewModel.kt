@@ -25,7 +25,7 @@ internal class PlaylistViewModel @Inject constructor(
     private val playlistPager: ObservePagedPlaylist,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val playlistId = savedStateHandle.getStateFlow<String>("id", "")
+    private val playlistId = savedStateHandle.getStateFlow("id", "")
 
     private val _playlistInfo = MutableStateFlow<PlaylistInfo?>(null)
     val playlistInfo: StateFlow<PlaylistInfo?> = _playlistInfo.asStateFlow()

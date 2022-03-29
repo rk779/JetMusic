@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import ml.rk585.jetmusic.core.base.extensions.toCompactView
 import ml.rk585.jetmusic.core.base.util.Extractor
 import ml.rk585.jetmusic.ui.common.R
 import org.schabi.newpipe.extractor.InfoItem
@@ -90,7 +91,8 @@ fun MediaListItem(
                     InfoItem.InfoType.STREAM -> (item as StreamInfoItem).uploaderName
                     InfoItem.InfoType.PLAYLIST -> (item as PlaylistInfoItem).uploaderName +
                             if (item.streamCount > 0) " • ${item.streamCount} songs" else ""
-                    InfoItem.InfoType.CHANNEL -> stringResource(id = R.string.artist)
+                    InfoItem.InfoType.CHANNEL -> stringResource(id = R.string.artist) +
+                            if ((item as ChannelInfoItem).subscriberCount > 0) " • ${item.subscriberCount.toCompactView()} subscribers" else ""
                     else -> stringResource(id = R.string.unknown)
                 },
                 style = MaterialTheme.typography.bodyMedium,

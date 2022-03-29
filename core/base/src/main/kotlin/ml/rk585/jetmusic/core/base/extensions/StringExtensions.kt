@@ -11,3 +11,10 @@ fun String.stripAlbumPrefix(): String {
         .removePrefix("–")
         .trim()
 }
+
+fun String.stripArtistSuffix(): String {
+    return this.removeSuffix("Topic")
+        .trim()
+        .removeSuffix("-")
+        .trim()
+}
