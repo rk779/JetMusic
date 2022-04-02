@@ -1,15 +1,33 @@
 package ml.rk585.jetmusic.ui.common.theme
 
+import android.content.Context
 import androidx.compose.material.Colors
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.contentColorFor
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 
-val darkColorScheme = darkColorScheme()
+fun dynamicBlackColorScheme(context: Context): ColorScheme {
+    return dynamicDarkColorScheme(context).run {
+        copy(
+            background = Color.Black,
+            surface = Color.Black,
+            onBackground = Color.White,
+            onSurface = Color.White
+        )
+    }
+}
+
+val blackColorScheme = darkColorScheme(
+    background = Color.Black,
+    surface = Color.Black,
+    onBackground = Color.White,
+    onSurface = Color.White
+)
 val lightColorScheme = lightColorScheme()
 
 fun ColorScheme.toMaterial2Colors(isLight: Boolean): Colors {

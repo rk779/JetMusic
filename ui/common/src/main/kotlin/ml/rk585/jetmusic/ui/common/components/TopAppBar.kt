@@ -16,6 +16,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun SmallTopAppBar(
@@ -26,7 +27,7 @@ fun SmallTopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
     colors: TopAppBarColors = TopAppBarDefaults.smallTopAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    bottomContent: @Composable ColumnScope.() -> Unit = {}
+    bottomContent: @Composable ColumnScope.(containerColor: Color) -> Unit = {}
 ) {
     val scrollFraction = scrollBehavior?.scrollFraction ?: 0f
     val containerColor by colors.containerColor(scrollFraction)
@@ -46,7 +47,7 @@ fun SmallTopAppBar(
                 scrollBehavior = scrollBehavior
             )
 
-            bottomContent()
+            bottomContent(containerColor)
         }
     }
 }

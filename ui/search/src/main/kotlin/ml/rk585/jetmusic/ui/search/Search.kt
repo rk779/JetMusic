@@ -148,7 +148,7 @@ internal fun SearchTopAppBar(
         title = { Text(text = stringResource(id = R.string.search)) },
         modifier = modifier,
         scrollBehavior = scrollBehavior
-    ) {
+    ) { containerColor ->
         SearchTextField(
             value = searchQuery,
             onValueChange = { value ->
@@ -176,7 +176,8 @@ internal fun SearchTopAppBar(
                     )
                 )
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            containerColor = containerColor
         ) {
             PAGES.forEachIndexed { index, title ->
                 Tab(

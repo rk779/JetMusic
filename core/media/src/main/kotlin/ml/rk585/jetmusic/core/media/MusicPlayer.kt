@@ -23,7 +23,6 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import ml.rk585.jetmusic.core.media.model.PlaybackProgress
 import ml.rk585.jetmusic.core.media.model.PlayerState
-import ml.rk585.jetmusic.core.media.util.playPause
 import ml.rk585.jetmusic.core.media.util.toMediaItem
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
@@ -102,7 +101,10 @@ class MusicPlayerImpl(
     }
 
     override fun pauseOrResume() {
-        mediaController?.playPause()
+        when (mediaController?.isPlaying) {
+            true -> mediaController?.pause()
+            else -> mediaController?.play()
+        }
     }
 
     override fun play(streamInfoItem: StreamInfoItem) {

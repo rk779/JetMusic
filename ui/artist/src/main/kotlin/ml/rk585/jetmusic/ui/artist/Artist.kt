@@ -65,7 +65,7 @@ import coil.compose.AsyncImage
 import com.ramcosta.composedestinations.annotation.Destination
 import ml.rk585.jetmusic.core.base.extensions.stripArtistSuffix
 import ml.rk585.jetmusic.ui.common.R
-import ml.rk585.jetmusic.ui.common.components.FullScreenLoading
+import ml.rk585.jetmusic.ui.common.components.Loading
 import ml.rk585.jetmusic.ui.common.components.IconButton
 import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
 import ml.rk585.jetmusic.ui.common.components.MediaListItem
@@ -103,7 +103,7 @@ internal fun Artist(
             onNavigateUp = navigator::onNavigateUp
         )
     } else {
-        FullScreenLoading()
+        Loading()
     }
 }
 

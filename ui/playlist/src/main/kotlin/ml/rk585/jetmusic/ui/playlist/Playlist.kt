@@ -48,7 +48,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import ml.rk585.jetmusic.core.base.extensions.orNA
 import ml.rk585.jetmusic.core.base.extensions.stripAlbumPrefix
 import ml.rk585.jetmusic.ui.common.R
-import ml.rk585.jetmusic.ui.common.components.FullScreenLoading
+import ml.rk585.jetmusic.ui.common.components.Loading
 import ml.rk585.jetmusic.ui.common.components.IconButton
 import ml.rk585.jetmusic.ui.common.components.JetImage
 import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
@@ -85,7 +85,7 @@ internal fun Playlist(
             onNavigateUp = navigator::onNavigateUp
         )
     } else {
-        FullScreenLoading()
+        Loading()
     }
 }
 
