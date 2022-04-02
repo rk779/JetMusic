@@ -1,5 +1,7 @@
 package ml.rk585.jetmusic.ui.playlist
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,6 +35,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
@@ -56,6 +59,8 @@ import ml.rk585.jetmusic.ui.common.components.MediaListItem
 import ml.rk585.jetmusic.ui.common.components.ScaledCoverImage
 import ml.rk585.jetmusic.ui.common.components.rememberStateWithLifecycle
 import ml.rk585.jetmusic.ui.common.components.scaledCoverImageScrollProgress
+import ml.rk585.jetmusic.ui.common.utils.ADAPTIVE_COLOR_ANIMATION
+import ml.rk585.jetmusic.ui.common.utils.adaptiveColor
 import org.schabi.newpipe.extractor.playlist.PlaylistInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
 
@@ -96,19 +101,28 @@ internal fun Playlist(
     playlistPagingItems: LazyPagingItems<StreamInfoItem>,
     onNavigateUp: () -> Unit
 ) {
+    val adaptiveColor by adaptiveColor(
+        imageData = playlistInfo.thumbnailUrl,
+        fallback = MaterialTheme.colorScheme.onBackground,
+        gradientEndColor = MaterialTheme.colorScheme.surface
+    )
+    val contentColor by animateColorAsState(adaptiveColor.color, ADAPTIVE_COLOR_ANIMATION)
     val scrollBehavior = remember { TopAppBarDefaults.enterAlwaysScrollBehavior() }
 
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .background(adaptiveColor.gradient),
         topBar = {
             PlaylistTopAppBar(
                 title = playlistInfo.name.stripAlbumPrefix(),
                 scrollBehavior = scrollBehavior,
                 onNavigateUp = onNavigateUp
             )
-        }
+        },
+        containerColor = Color.Transparent,
+        contentColor = contentColor
     ) { paddingValues ->
         PlaylistContent(
             playlistInfo = playlistInfo,
@@ -258,6 +272,9 @@ internal fun PlaylistTopAppBar(
                 )
             }
         },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = Color.Transparent
+        ),
         scrollBehavior = scrollBehavior
     )
 }
