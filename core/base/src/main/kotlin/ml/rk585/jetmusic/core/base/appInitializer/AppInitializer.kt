@@ -1,4 +1,4 @@
-package ml.rk585.jetmusic.appInitializers
+package ml.rk585.jetmusic.core.base.appInitializer
 
 import android.app.Application
 

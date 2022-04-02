@@ -15,8 +15,6 @@ import ml.rk585.jetmusic.core.base.util.ExtractorHelper
 import ml.rk585.jetmusic.core.media.MusicPlayer
 import ml.rk585.jetmusic.core.media.MusicPlayerImpl
 import ml.rk585.jetmusic.core.media.MusicService
-import ml.rk585.jetmusic.data.service.PlayerConnection
-import ml.rk585.jetmusic.data.service.PlayerConnectionImpl
 import okhttp3.OkHttpClient
 import org.schabi.newpipe.extractor.ServiceList
 import org.schabi.newpipe.extractor.services.youtube.YoutubeService
@@ -69,15 +67,6 @@ object AppModule {
         return MusicPlayerImpl(
             context = context,
             serviceComponent = ComponentName(context, MusicService::class.java)
-        )
-    }
-
-    @Provides
-    fun providePlayerConnection(
-        @ApplicationContext context: Context
-    ): PlayerConnection {
-        return PlayerConnectionImpl(
-            context = context
         )
     }
 

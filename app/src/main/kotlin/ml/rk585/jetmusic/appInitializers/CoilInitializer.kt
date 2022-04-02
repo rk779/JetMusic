@@ -6,6 +6,7 @@ import coil.Coil
 import coil.ImageLoader
 import coil.disk.DiskCache
 import dagger.hilt.android.qualifiers.ApplicationContext
+import ml.rk585.jetmusic.core.base.appInitializer.AppInitializer
 import ml.rk585.jetmusic.core.base.util.CoroutineDispatchers
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient

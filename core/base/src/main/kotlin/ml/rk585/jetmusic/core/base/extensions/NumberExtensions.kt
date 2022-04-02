@@ -25,12 +25,6 @@ fun Long.millisToDuration(): String {
     }
 }
 
-fun Long.formatAsPlayerTime(): String {
-    val minutes = String.format("%02d", this / 60_000L)
-    val seconds = String.format("%02d", (this % 60_000L) / 1000L)
-    return "$minutes:$seconds"
-}
-
 fun Number.toCompactView(): String {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         return CompactDecimalFormat.getInstance(

@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
-    id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
 }
@@ -64,34 +63,18 @@ kapt {
     useBuildCache = true
 }
 
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
-        }
-    }
-}
-
 dependencies {
-    // Accompanist Libraries
-    implementation(libs.bundles.accompanist)
-
     // Android Desugaring
     coreLibraryDesugaring(libs.android.desugarJdkLibs)
 
     // AndroidX Libraries
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.palette.ktx)
     implementation(libs.bundles.androidx.compose)
     implementation(libs.bundles.androidx.lifecycle)
     implementation(libs.bundles.androidx.media)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Image Loader
-    implementation(libs.bundles.coil)
+    implementation(libs.coil)
 
     // Chucker Debugger
     debugImplementation(libs.chucker.debug)
@@ -99,25 +82,10 @@ dependencies {
 
     // Compose Destinations
     implementation(libs.compose.destinations.core)
-    ksp(libs.compose.destinations.ksp)
 
     // Dependency Injection
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-
-    // Kotlinx libraries
-    implementation(libs.bundles.kotlinx.coroutines)
-
-    // NewPipe Extractor
-    implementation(libs.newpipe.extractor)
-
-    // OkHttp
-    implementation(libs.okHttp3.okHttp)
-
-    // Logging
-    implementation(libs.logcat.lib)
-
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Projects
     implementation(projects.core.base)

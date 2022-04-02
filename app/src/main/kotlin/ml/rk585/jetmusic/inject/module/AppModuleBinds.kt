@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
-import ml.rk585.jetmusic.appInitializers.AppInitializer
+import ml.rk585.jetmusic.core.base.appInitializer.AppInitializer
 import ml.rk585.jetmusic.appInitializers.CoilInitializer
 import ml.rk585.jetmusic.appInitializers.LogcatInitializer
 import ml.rk585.jetmusic.appInitializers.NewPipeInitializer
