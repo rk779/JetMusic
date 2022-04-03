@@ -1,6 +1,5 @@
 package ml.rk585.jetmusic.ui.playlist
 
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -51,15 +50,14 @@ import com.ramcosta.composedestinations.annotation.Destination
 import ml.rk585.jetmusic.core.base.extensions.orNA
 import ml.rk585.jetmusic.core.base.extensions.stripAlbumPrefix
 import ml.rk585.jetmusic.ui.common.R
-import ml.rk585.jetmusic.ui.common.components.Loading
 import ml.rk585.jetmusic.ui.common.components.IconButton
 import ml.rk585.jetmusic.ui.common.components.JetImage
 import ml.rk585.jetmusic.ui.common.components.JetMusicTopAppBar
+import ml.rk585.jetmusic.ui.common.components.Loading
 import ml.rk585.jetmusic.ui.common.components.MediaListItem
 import ml.rk585.jetmusic.ui.common.components.ScaledCoverImage
 import ml.rk585.jetmusic.ui.common.components.rememberStateWithLifecycle
 import ml.rk585.jetmusic.ui.common.components.scaledCoverImageScrollProgress
-import ml.rk585.jetmusic.ui.common.utils.ADAPTIVE_COLOR_ANIMATION
 import ml.rk585.jetmusic.ui.common.utils.adaptiveColor
 import org.schabi.newpipe.extractor.playlist.PlaylistInfo
 import org.schabi.newpipe.extractor.stream.StreamInfoItem
@@ -103,10 +101,9 @@ internal fun Playlist(
 ) {
     val adaptiveColor by adaptiveColor(
         imageData = playlistInfo.thumbnailUrl,
-        fallback = MaterialTheme.colorScheme.onBackground,
+        fallback = MaterialTheme.colorScheme.background,
         gradientEndColor = MaterialTheme.colorScheme.surface
     )
-    val contentColor by animateColorAsState(adaptiveColor.color, ADAPTIVE_COLOR_ANIMATION)
     val scrollBehavior = remember { TopAppBarDefaults.enterAlwaysScrollBehavior() }
 
     Scaffold(
@@ -122,7 +119,7 @@ internal fun Playlist(
             )
         },
         containerColor = Color.Transparent,
-        contentColor = contentColor
+        contentColor = LocalContentColor.current
     ) { paddingValues ->
         PlaylistContent(
             playlistInfo = playlistInfo,
