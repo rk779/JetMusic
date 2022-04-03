@@ -11,11 +11,13 @@ import androidx.media3.session.SessionToken
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -68,6 +70,7 @@ class MusicPlayerImpl(
     private val _currentMediaItem = MutableStateFlow(MediaItem.EMPTY)
     override val currentMediaItem: StateFlow<MediaItem> = _currentMediaItem.asStateFlow()
 
+    private var playbackProgressJob: Job = Job()
     private val _playbackProgress = MutableStateFlow(PlaybackProgress())
     override val playbackProgress: StateFlow<PlaybackProgress> = _playbackProgress.asStateFlow()
 
@@ -160,7 +163,7 @@ class MusicPlayerImpl(
         val controller = this.mediaController ?: return
         controller.addListener(playerListener)
         controller.playWhenReady = true
-        startPlaybackProgress(controller).start()
+        startPlaybackProgress(controller)
     }
 
     private val playerListener = object : Player.Listener {
@@ -185,24 +188,33 @@ class MusicPlayerImpl(
         }
     }
 
-    private fun startPlaybackProgress(mediaController: MediaController) = launch {
-        _playbackProgress.update { playbackProgress ->
-            playbackProgress.copy(
-                total = mediaController.duration.coerceAtLeast(1),
-                position = mediaController.currentPosition,
-                buffered = mediaController.bufferedPosition
-            )
+    private fun startPlaybackProgress(mediaController: MediaController) {
+        launch {
+            combine(currentMediaItem, playbackState, ::Pair)
+                .collectLatest { (mediaItem, playerState) ->
+                    playbackProgressJob.cancel()
+                    if (mediaItem == MediaItem.EMPTY || playerState == Player.STATE_ENDED) {
+                        return@collectLatest
+                    }
+                    if (mediaController.isPlaying && playerState != Player.STATE_BUFFERING) {
+                        startPlaybackProgressUpdateJob(mediaController)
+                    }
+                }
         }
+    }
 
-        while (isActive) {
-            _playbackProgress.update { playbackProgress ->
-                playbackProgress.copy(
-                    total = mediaController.duration.coerceAtLeast(1),
-                    position = mediaController.currentPosition,
-                    buffered = mediaController.bufferedPosition
-                )
+    private fun startPlaybackProgressUpdateJob(mediaController: MediaController) {
+        playbackProgressJob = launch {
+            while (isActive) {
+                _playbackProgress.update { playbackProgress ->
+                    playbackProgress.copy(
+                        total = mediaController.duration.coerceAtLeast(1),
+                        position = mediaController.currentPosition,
+                        buffered = mediaController.bufferedPosition
+                    )
+                }
+                delay(1000)
             }
-            delay(1000)
         }
     }
 }
