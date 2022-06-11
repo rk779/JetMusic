@@ -21,9 +21,9 @@ allprojects {
         kotlinOptions {
             // Require OptIn
             freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-Xopt-in=kotlin.Experimental",
-                "-Xopt-in=kotlin.RequiresOptIn"
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlin.Experimental",
+                "-opt-in=kotlin.RequiresOptIn"
             )
 
             // Set JVM target to 11

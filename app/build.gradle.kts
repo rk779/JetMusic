@@ -47,12 +47,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        freeCompilerArgs = freeCompilerArgs + listOf("-Xopt-in=kotlin.RequiresOptIn")
-        jvmTarget = JavaVersion.VERSION_11.toString()
-        languageVersion = "1.6"
-    }
-
     lint {
         disable.add("UnsafeOptInUsageError")
     }

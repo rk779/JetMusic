@@ -2,6 +2,7 @@ package ml.rk585.jetmusic.util
 
 import androidx.navigation.NavController
 import com.ramcosta.composedestinations.dynamic.within
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.navigateTo
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import ml.rk585.jetmusic.ui.artist.ArtistNavigator
@@ -25,7 +26,7 @@ internal class Navigator(
     SettingsNavigator {
 
     override fun openSettings() {
-        navController.navigateTo(SettingsDestination within navGraphSpec)
+        navController.navigate(SettingsDestination within navGraphSpec)
     }
 
     override fun onNavigateUp() {
@@ -33,10 +34,10 @@ internal class Navigator(
     }
 
     override fun openArtist(id: String) {
-        navController.navigateTo(ArtistDestination(id) within navGraphSpec)
+        navController.navigate(ArtistDestination(id) within navGraphSpec)
     }
 
     override fun openPlaylist(id: String) {
-        navController.navigateTo(PlaylistDestination(id) within navGraphSpec)
+        navController.navigate(PlaylistDestination(id) within navGraphSpec)
     }
 }

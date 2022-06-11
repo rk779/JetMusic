@@ -37,6 +37,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberTopAppBarScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -115,7 +116,7 @@ internal fun Artist(
     onNavigateUp: () -> Unit
 ) {
     val listState = rememberLazyListState()
-    val scrollBehavior = remember { TopAppBarDefaults.pinnedScrollBehavior() }
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarScrollState())
 
     Scaffold(
         modifier = Modifier
@@ -327,7 +328,7 @@ internal fun ArtistTopAppBar(
             ) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(id = ml.rk585.jetmusic.ui.common.R.string.navigate_up)
+                    contentDescription = stringResource(id = R.string.navigate_up)
                 )
             }
         },

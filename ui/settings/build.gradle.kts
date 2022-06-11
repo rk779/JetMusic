@@ -17,20 +17,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    libraryVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+            }
+        }
+    }
+
     ksp {
         arg("compose-destinations.moduleName", "settings")
         arg("compose-destinations.mode", "destinations")
-    }
-}
-
-kotlin {
-    sourceSets {
-        debug {
-            kotlin.srcDir("build/generated/ksp/debug/kotlin")
-        }
-        release {
-            kotlin.srcDir("build/generated/ksp/release/kotlin")
-        }
     }
 }
 

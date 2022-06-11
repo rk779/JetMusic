@@ -28,7 +28,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.ramcosta.composedestinations.navigation.navigateTo
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import ml.rk585.jetmusic.ui.common.components.JetMusicBottomNavigationBar
 import ml.rk585.jetmusic.ui.common.components.ModalBottomSheetLayout
@@ -67,7 +67,7 @@ internal fun JetMusic(
 ) {
     val currentNavGraphSpec by navController.currentNavGraphSpecAsState()
     val navigateToNavGraphSpec: (NavGraphSpec) -> Unit = { navGraphSpec ->
-        navController.navigateTo(navGraphSpec) {
+        navController.navigate(navGraphSpec) {
             launchSingleTop = true
             restoreState = true
             popUpTo(navController.graph.findStartDestination().id) {
@@ -81,7 +81,7 @@ internal fun JetMusic(
         bottomBar = {
             Column {
                 MiniPlayer(
-                    openPlayerSheet = { navController.navigateTo(NavGraphs.player) },
+                    openPlayerSheet = { navController.navigate(NavGraphs.player) },
                     modifier = Modifier.fillMaxWidth()
                 )
                 BottomNavigationBar(
