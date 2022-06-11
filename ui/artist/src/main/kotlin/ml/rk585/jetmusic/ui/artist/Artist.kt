@@ -23,6 +23,7 @@ import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -43,7 +44,6 @@ import coil.compose.rememberAsyncImagePainter
 import com.ramcosta.composedestinations.annotation.Destination
 import ml.rk585.jetmusic.core.base.extensions.stripArtistSuffix
 import ml.rk585.jetmusic.ui.common.R
-import ml.rk585.jetmusic.ui.common.components.IconButton
 import ml.rk585.jetmusic.ui.common.components.Loading
 import ml.rk585.jetmusic.ui.common.components.MediaListItem
 import ml.rk585.jetmusic.ui.common.components.ParallaxTopAppBar
