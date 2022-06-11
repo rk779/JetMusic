@@ -31,6 +31,7 @@ androidx-compose-material-icons = { module = "androidx.compose.material:material
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
 
 # AndroidX Core Libraries
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.8.0" }
@@ -106,7 +107,8 @@ androidx-compose = [
     "androidx-compose-material",
     "androidx-compose-material-icons",
     "androidx-compose-runtime",
-    "androidx-compose-ui"
+    "androidx-compose-ui",
+    "androidx-compose-ui-util"
 ]
 androidx-lifecycle = [
     "androidx-lifecycle-process",
